@@ -919,10 +919,10 @@
       try {
         let allSlides = window.PRELOADED_SLIDES || null;
         try {
-          const res = await fetch(./slides_data.json?t=);
+          const res = await fetch('./slides_data.json?t=' + Date.now());
           if (res.ok) allSlides = await res.json();
         } catch (e) {
-          const rRes = await fetch(https://dingsong2022.github.io/2026-shinchon-openclass/slides_data.json?t=);
+          const rRes = await fetch('https://dingsong2022.github.io/2026-shinchon-openclass/slides_data.json?t=' + Date.now());
           if (rRes.ok) allSlides = await rRes.json();
         }
         if (allSlides) {
@@ -1717,7 +1717,7 @@
         }
       } catch (e) {
         try {
-          const remoteRes = await fetch(https://dingsong2022.github.io/2026-shinchon-openclass/slides_data.json?t=);
+          const remoteRes = await fetch('https://dingsong2022.github.io/2026-shinchon-openclass/slides_data.json?t=' + Date.now());
           if (remoteRes.ok) {
             allSlides = await remoteRes.json();
             cachedSlidesJson = allSlides;
