@@ -912,7 +912,39 @@
       restoreMyCheckin();
       loadCheckins();
       loadObservations();
+      syncSlideTitlesOnLoad();
     });
+
+    async function syncSlideTitlesOnLoad() {
+      try {
+        let allSlides = window.PRELOADED_SLIDES || null;
+        try {
+          const res = await fetch(./slides_data.json?t=);
+          if (res.ok) allSlides = await res.json();
+        } catch (e) {
+          const rRes = await fetch(https://dingsong2022.github.io/2026-shinchon-openclass/slides_data.json?t=);
+          if (rRes.ok) allSlides = await rRes.json();
+        }
+        if (allSlides) {
+          cachedSlidesJson = allSlides;
+          if (allSlides._titles) {
+            let changed = false;
+            CONFIG.CLASSES.forEach((cls, idx) => {
+              const sNum = String(idx + 3);
+              const liveTitle = allSlides._titles[sNum];
+              if (liveTitle && liveTitle.trim() && liveTitle.trim() !== cls.title) {
+                cls.title = liveTitle.trim();
+                changed = true;
+              }
+            });
+            if (changed) {
+              renderClassCards();
+              initSelectOptions();
+            }
+          }
+        }
+      } catch (e) {}
+    }
 
     function renderClassCards() {
       const container = document.getElementById('classCardsContainer');

@@ -39,10 +39,16 @@ jobs:
           url = "https://docs.google.com/presentation/d/1IR-BTZCYyhxH32vfEI7ogHkk7HoYfo5MBYHqpJoptFU/export/pptx"
           data = urllib.request.urlopen(url, timeout=20).read()
           prs = Presentation(io.BytesIO(data))
-          out = {}
+          out = {"_titles": {}}
           for i in range(2, len(prs.slides)):
               key = str(i+1)
               s = prs.slides[i]
+              for sh in s.shapes:
+                  if sh.has_text_frame and sh.text_frame.text.strip():
+                      lines = [ln.strip() for ln in sh.text_frame.text.split("\n") if ln.strip()]
+                      if len(lines) >= 2:
+                          out["_titles"][key] = lines[1]
+                          break
               tables = [[[c.text.strip() for c in r.cells] for r in sh.table.rows] for sh in s.shapes if sh.has_table]
               # Check if fetched tables have actual content; if blank in Google Slides, keep existing pre-filled data
               has_content = any(
