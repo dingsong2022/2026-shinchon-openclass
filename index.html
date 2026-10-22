@@ -1,0 +1,1554 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>2026 용인신촌중학교 수업 공개 웰컴레터</title>
+  <!-- Pretendard & Gowun Batang (Editorial Serif) -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS & 과정안 슬라이드 데이터 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="slides_data.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+            serif: ['Gowun Batang', 'Batang', 'Georgia', 'serif'],
+          },
+          colors: {
+            paper: {
+              50: '#FCFBF8',
+              100: '#F5F2EB',
+              200: '#EAE4D8',
+              300: '#DCD3C2',
+            },
+            forest: {
+              50: '#F2F6F4',
+              100: '#E1EBE5',
+              200: '#C5D9CE',
+              600: '#2E5A46',
+              700: '#234737',
+              800: '#1B372B',
+              900: '#13281F',
+            },
+            terracotta: {
+              50: '#FBF5F2',
+              100: '#F5E6DF',
+              200: '#E9C9BC',
+              600: '#B85D3B',
+              700: '#9A4A2C',
+              800: '#7D3B23',
+            },
+            ink: {
+              900: '#1A1C1B',
+              700: '#3D423F',
+              500: '#686E6A',
+              400: '#8F9691',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Pretendard', sans-serif;
+      background-color: #ECE8DF;
+      color: #1A1C1B;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+    .editorial-shadow {
+      box-shadow: 0 12px 40px -12px rgba(26, 28, 27, 0.08);
+    }
+    .card-transition {
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .card-transition:hover {
+      transform: translateY(-1px);
+    }
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="min-h-screen pb-20">
+
+  <!-- =====================================================================
+       🛠️ [관리자 설정 영역] 과정안 구글 슬라이드 링크 및 실시간 참관록 연동 설정
+       추후 각 수업의 구글 슬라이드 링크가 준비되면 slideUrl 값에 넣어주세요!
+  ====================================================================== -->
+  <script>
+    const CONFIG = {
+      // [실시간 공유 DB 주소]
+      // 구글 스프레드시트 웹앱(Apps Script) URL을 넣으면 모든 참관인의 스마트폰과 협의회 화면에서 실시간 공유됩니다.
+      SHARED_API_URL: "", 
+
+      // [구글 슬라이드 문서 ID]
+      PRESENTATION_ID: "1IR-BTZCYyhxH32vfEI7ogHkk7HoYfo5MBYHqpJoptFU",
+
+      // [교시별 수업 목록 및 과정안 링크 설정]
+      CLASSES: [
+        // ================= 5교시 (13:30~14:15) =================
+        {
+          id: "p5-kor-kmj",
+          period: 5,
+          time: "13:30~14:15",
+          subject: "국어",
+          teacher: "김명진",
+          title: "AI서논술형 평가를 활용하여 생각의 힘 기르기",
+          targetClass: "1-1",
+          room: "1-1 교실",
+          floor: "5층",
+          floorDetail: "5층 서편 (엘리베이터 좌측)",
+          conferenceTime: "6교시 (14:25~15:10)",
+          conferenceRoom: "4층 꿈여행진로교실",
+          slidePageId: "p3",
+          slideUrl: "https://docs.google.com/presentation/d/1IR-BTZCYyhxH32vfEI7ogHkk7HoYfo5MBYHqpJoptFU/preview?rm=minimal&slide=id.p3",
+          accent: "border-l-[#9A4A2C]"
+        },
+        {
+          id: "p5-tech-ssm",
+          period: 5,
+          time: "13:30~14:15",
+          subject: "기술가정",
+          teacher: "신수민",
+          title: "AI를 활용한 문제 해결하기",
+          targetClass: "1-10",
+          room: "1-10 교실",
+          floor: "4층",
+          floorDetail: "4층 중앙 (엘리베이터 우측)",
+          conferenceTime: "6교시 (14:25~15:10)",
+          conferenceRoom: "4층 꿈여행진로교실",
+          slidePageId: "p4",
+          slideUrl: "https://docs.google.com/presentation/d/1IR-BTZCYyhxH32vfEI7ogHkk7HoYfo5MBYHqpJoptFU/preview?rm=minimal&slide=id.p4",
+          accent: "border-l-[#234737]"
+        },
+        {
+          id: "p5-soc-jeb",
+          period: 5,
+          time: "13:30~14:15",
+          subject: "사회",
+          teacher: "조은빈",
+          title: "AI를 활용한 과제 수행하기",
+          targetClass: "3-9",
+          room: "3-9 교실",
+          floor: "1층",
+          floorDetail: "1층 동편 (중앙현관 우측 복도 끝)",
+          conferenceTime: "6교시 (14:25~15:10)",
+          conferenceRoom: "4층 꿈여행진로교실",
+          slidePageId: "p5",
+          slideUrl: "https://docs.google.com/presentation/d/1IR-BTZCYyhxH32vfEI7ogHkk7HoYfo5MBYHqpJoptFU/preview?rm=minimal&slide=id.p5",
+          accent: "border-l-[#5B6B5C]"
+        },
+        {
+          id: "p5-pe-mhj",
+          period: 5,
+          time: "13:30~14:15",
+          subject: "체육",
+          teacher: "민현지",
+          title: "AI를 활용하여 농구 전술 구상하기",
+          targetClass: "3-10",
+          room: "농구장",
+          floor: "야외 (1층)",
+          floorDetail: "야외 농구장",
+          conferenceTime: "6교시 (14:25~15:10)",
+          conferenceRoom: "4층 꿈여행진로교실",
+          slidePageId: "p6",
+          slideUrl: "https://docs.google.com/presentation/d/1IR-BTZCYyhxH32vfEI7ogHkk7HoYfo5MBYHqpJoptFU/preview?rm=minimal&slide=id.p6",
+          accent: "border-l-[#8C6239]"
+        },
+        {
+          id: "p5-car-byh",
+          period: 5,
+          time: "13:30~14:15",
+          subject: "진로",
+          teacher: "배연화",
+          title: "AI를 활용한 진로 설계",
+          targetClass: "3-2",
+          room: "3-2 교실",
+          floor: "2층",
+          floorDetail: "2층 동편 (엘리베이터 우측 방송실 옆)",
+          conferenceTime: "6교시 (14:25~15:10)",
+          conferenceRoom: "4층 꿈여행진로교실",
+          slidePageId: "p7",
+          slideUrl: "https://docs.google.com/presentation/d/1IR-BTZCYyhxH32vfEI7ogHkk7HoYfo5MBYHqpJoptFU/preview?rm=minimal&slide=id.p7",
+          accent: "border-l-[#4A5859]"
+        },
+        {
+          id: "p5-tech-kcj",
+          period: 5,
+          time: "13:30~14:15",
+          subject: "기술가정",
+          teacher: "김찬진",
+          title: "학교 앞 교통 정상화 방안 계획하기",
+          targetClass: "2-8",
+          room: "기술가정실",
+          floor: "3층",
+          floorDetail: "3층 서편 남쪽 (2-4 교실 아래편 복도)",
+          conferenceTime: "6교시 (14:25~15:10)",
+          conferenceRoom: "4층 꿈여행진로교실",
+          slidePageId: "h6b61e19527343a8a_2_3",
+          slideUrl: "https://docs.google.com/presentation/d/1IR-BTZCYyhxH32vfEI7ogHkk7HoYfo5MBYHqpJoptFU/preview?rm=minimal&slide=id.h6b61e19527343a8a_2_3",
+          accent: "border-l-[#234737]"
+        },
+
+        // ================= 6교시 (14:25~15:10) =================
+        {
+          id: "p6-eng-sje",
+          period: 6,
+          time: "14:25~15:10",
+          subject: "영어",
+          teacher: "송지은",
+          title: "질문/탐구/피드백, AI와 탐구하는 진로 찾기 영어수업",
+          targetClass: "1-6",
+          room: "1-6 교실",
+          floor: "5층",
+          floorDetail: "5층 동편 (엘리베이터 우측)",
+          conferenceTime: "7교시 (15:20~16:05)",
+          conferenceRoom: "4층 꿈여행진로교실",
+          slidePageId: "p9",
+          slideUrl: "https://docs.google.com/presentation/d/1IR-BTZCYyhxH32vfEI7ogHkk7HoYfo5MBYHqpJoptFU/preview?rm=minimal&slide=id.p9",
+          accent: "border-l-[#3B5249]"
+        },
+        {
+          id: "p6-kor-hjk",
+          period: 6,
+          time: "14:25~15:10",
+          subject: "국어",
+          teacher: "홍진경",
+          title: "AI를 활용한 보고서 쓰기",
+          targetClass: "3-9",
+          room: "3-9 교실",
+          floor: "1층",
+          floorDetail: "1층 동편 (중앙현관 우측 복도 끝)",
+          conferenceTime: "7교시 (15:20~16:05)",
+          conferenceRoom: "4층 꿈여행진로교실",
+          slidePageId: "p10",
+          slideUrl: "https://docs.google.com/presentation/d/1IR-BTZCYyhxH32vfEI7ogHkk7HoYfo5MBYHqpJoptFU/preview?rm=minimal&slide=id.p10",
+          accent: "border-l-[#9A4A2C]"
+        },
+        {
+          id: "p6-inf-gjy",
+          period: 6,
+          time: "14:25~15:10",
+          subject: "정보",
+          teacher: "구지윤",
+          title: "AI와 함께 코딩하기",
+          targetClass: "3-5",
+          room: "컴퓨터실",
+          floor: "2층",
+          floorDetail: "2층 서편 (엘리베이터 좌측)",
+          conferenceTime: "7교시 (15:20~16:05)",
+          conferenceRoom: "4층 꿈여행진로교실",
+          slidePageId: "p11",
+          slideUrl: "https://docs.google.com/presentation/d/1IR-BTZCYyhxH32vfEI7ogHkk7HoYfo5MBYHqpJoptFU/preview?rm=minimal&slide=id.p11",
+          accent: "border-l-[#2F3E46]"
+        },
+        {
+          id: "p6-his-phj",
+          period: 6,
+          time: "14:25~15:10",
+          subject: "역사",
+          teacher: "박혜정",
+          title: "AI를 활용한 문제 해결하기",
+          targetClass: "2-2",
+          room: "2-2 교실",
+          floor: "4층",
+          floorDetail: "4층 동편 (엘리베이터 우측)",
+          conferenceTime: "7교시 (15:20~16:05)",
+          conferenceRoom: "4층 꿈여행진로교실",
+          slidePageId: "p12",
+          slideUrl: "https://docs.google.com/presentation/d/1IR-BTZCYyhxH32vfEI7ogHkk7HoYfo5MBYHqpJoptFU/preview?rm=minimal&slide=id.p12",
+          accent: "border-l-[#7D4F38]"
+        }
+      ]
+    };
+  </script>
+
+  <!-- Main Container -->
+  <div id="appContainer" class="max-w-xl mx-auto transition-all duration-300 bg-paper-50 editorial-shadow min-h-screen overflow-hidden border-x border-paper-200">
+
+    <!-- ==================== 1. EDITORIAL HERO HEADER ==================== -->
+    <header class="relative bg-forest-900 text-paper-50 px-6 pt-10 pb-8 border-b-4 border-terracotta-600">
+      <!-- Subtle top line & label -->
+      <div class="flex items-center justify-between text-[11px] tracking-[0.18em] uppercase text-forest-200/80 pb-4 mb-5 border-b border-white/10">
+        <span>YONGIN SHINCHON MIDDLE SCHOOL</span>
+        <span>2026. 10. 27. TUE</span>
+      </div>
+
+      <!-- Theme Pills -->
+      <div class="flex flex-wrap gap-1.5 mb-5">
+        <span class="px-2.5 py-0.5 text-[11px] font-medium tracking-tight rounded bg-white/10 text-paper-100 border border-white/15">
+          AI 중점학교
+        </span>
+        <span class="px-2.5 py-0.5 text-[11px] font-medium tracking-tight rounded bg-white/10 text-paper-100 border border-white/15">
+          학습으로의 평가로 주도성을 키우는 학교
+        </span>
+        <span class="px-2.5 py-0.5 text-[11px] font-medium tracking-tight rounded bg-white/10 text-paper-100 border border-white/15">
+          세계시민교육 실천학교
+        </span>
+      </div>
+
+      <!-- Editorial Title -->
+      <h1 class="font-serif text-2xl sm:text-[28px] font-bold tracking-tight leading-[1.35] text-paper-50 mb-3">
+        2026 용인신촌중학교<br />
+        수업 공개에 초대합니다
+      </h1>
+      <p class="text-forest-100/80 text-xs sm:text-[13px] leading-relaxed mb-6 font-normal">
+        수업의 깊이를 나누고 배움을 삶으로 잇는 자리에 함께해 주셔서 진심으로 감사합니다.
+      </p>
+
+      <!-- Key Info Card -->
+      <div class="bg-forest-800/90 border border-white/10 rounded-xl p-4 space-y-2.5 text-xs sm:text-[13px]">
+        <div class="flex items-baseline gap-3">
+          <span class="text-forest-200/70 font-medium w-10 shrink-0 text-[11px] uppercase tracking-wider">일 시</span>
+          <strong class="text-paper-50 font-semibold tracking-tight">2026. 10. 27.(화) 13:30 ~ 16:05</strong>
+        </div>
+        <div class="flex items-baseline gap-3">
+          <span class="text-forest-200/70 font-medium w-10 shrink-0 text-[11px] uppercase tracking-wider">장 소</span>
+          <span class="text-paper-100">각 공개 수업 교실 및 <strong class="text-[#F3C6B6] font-semibold underline underline-offset-4 decoration-terracotta-600">4층 꿈여행진로교실(협의회)</strong></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ==================== STICKY QUICK NAVIGATION ==================== -->
+    <nav class="sticky top-0 z-30 bg-paper-50/95 backdrop-blur-md border-b border-paper-200 px-4 py-2.5 flex justify-between gap-1.5">
+      <a href="#section-schedule" class="flex-1 text-center py-2 px-1 rounded-lg text-xs font-semibold text-ink-700 hover:bg-paper-100 hover:text-forest-800 transition">
+        일정·협의회
+      </a>
+      <a href="#section-classes" class="flex-1 text-center py-2 px-1 rounded-lg text-xs font-semibold text-ink-700 hover:bg-paper-100 hover:text-forest-800 transition">
+        수업·과정안
+      </a>
+      <a href="#section-map" class="flex-1 text-center py-2 px-1 rounded-lg text-xs font-semibold text-ink-700 hover:bg-paper-100 hover:text-forest-800 transition">
+        교실배치도
+      </a>
+      <a href="#section-guestbook" class="flex-1 text-center py-2 px-1 rounded-lg text-xs font-semibold bg-forest-800 text-paper-50 hover:bg-forest-900 transition">
+        수업참관록
+      </a>
+    </nav>
+
+    <!-- ==================== 2. TIMETABLE & CONFERENCE NOTICE ==================== -->
+    <section id="section-schedule" class="px-6 pt-8 pb-7 border-b border-paper-200">
+      <div class="flex items-baseline justify-between mb-4">
+        <div>
+          <span class="text-[10px] font-bold tracking-[0.15em] uppercase text-terracotta-600 block mb-0.5">SCHEDULE & CONFERENCE</span>
+          <h2 class="font-serif text-lg font-bold text-ink-900">전체 일정 및 수업 나눔 협의회</h2>
+        </div>
+      </div>
+
+      <!-- Conference Notice Box (Warm Terracotta Accent) -->
+      <div class="bg-terracotta-50 border border-terracotta-200 rounded-xl p-4 mb-6">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-bold text-terracotta-800 flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-terracotta-600"></span>
+            수업 나눔 협의회 안내
+          </span>
+          <span class="text-[11px] font-semibold px-2 py-0.5 rounded bg-terracotta-100 text-terracotta-800">
+            장소: 4층 꿈여행진로교실
+          </span>
+        </div>
+        <div class="space-y-1.5 text-xs sm:text-[13px] text-ink-700 leading-relaxed">
+          <p>• <strong class="text-ink-900">5교시 수업 공개자 및 참관인</strong> → <strong class="text-terracotta-700 underline underline-offset-4">6교시(14:25~15:10)</strong>에 협의회 진행</p>
+          <p>• <strong class="text-ink-900">6교시 수업 공개자 및 참관인</strong> → <strong class="text-terracotta-700 underline underline-offset-4">7교시(15:20~16:05)</strong>에 협의회 진행</p>
+        </div>
+        <p class="text-[11px] text-ink-500 mt-2 pt-2 border-t border-terracotta-200/60">
+          ※ 4층 꿈여행진로교실은 4층 도서실(신촌학당) 맞은편 남쪽 복도에 위치해 있습니다.
+        </p>
+      </div>
+
+      <!-- Clean Editorial Timeline -->
+      <div class="divide-y divide-paper-200 border-y border-paper-200 text-xs sm:text-[13px]">
+        <!-- 5교시 -->
+        <div class="py-3.5 flex gap-4 items-start">
+          <div class="w-24 shrink-0">
+            <span class="inline-block px-2 py-0.5 rounded bg-forest-800 text-paper-50 text-[11px] font-semibold mb-1">5교시</span>
+            <p class="text-ink-500 font-medium text-[11px]">13:30 ~ 14:15</p>
+          </div>
+          <div class="flex-1">
+            <p class="font-bold text-ink-900 mb-0.5">1차 수업 공개 참관 (6개 강좌)</p>
+            <p class="text-ink-500 text-xs">국어(1-1), 기술가정(1-10), 사회(3-9), 체육(농구장), 진로(3-2), 기술가정(기술가정실)</p>
+          </div>
+        </div>
+
+        <!-- 6교시 -->
+        <div class="py-3.5 flex gap-4 items-start">
+          <div class="w-24 shrink-0">
+            <span class="inline-block px-2 py-0.5 rounded bg-forest-700 text-paper-50 text-[11px] font-semibold mb-1">6교시</span>
+            <p class="text-ink-500 font-medium text-[11px]">14:25 ~ 15:10</p>
+          </div>
+          <div class="flex-1 space-y-2">
+            <div>
+              <span class="text-[11px] font-semibold text-forest-700">[6교시 참관 교사]</span>
+              <p class="font-bold text-ink-900">2차 수업 공개 참관 (4개 강좌)</p>
+              <p class="text-ink-500 text-xs">영어(1-6), 국어(3-9), 정보(컴퓨터실), 역사(2-2)</p>
+            </div>
+            <div class="bg-paper-100 px-3 py-2 rounded-lg border border-paper-200">
+              <span class="text-[11px] font-semibold text-terracotta-700">[5교시 수업자 및 참관인]</span>
+              <p class="font-bold text-ink-900">5교시 수업 나눔 협의회 <span class="font-normal text-ink-500 text-xs">· 4층 꿈여행진로교실</span></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7교시 -->
+        <div class="py-3.5 flex gap-4 items-start">
+          <div class="w-24 shrink-0">
+            <span class="inline-block px-2 py-0.5 rounded bg-terracotta-600 text-paper-50 text-[11px] font-semibold mb-1">7교시</span>
+            <p class="text-ink-500 font-medium text-[11px]">15:20 ~ 16:05</p>
+          </div>
+          <div class="flex-1">
+            <span class="text-[11px] font-semibold text-terracotta-700">[6교시 수업자 및 참관인]</span>
+            <p class="font-bold text-ink-900 mb-0.5">6교시 수업 나눔 협의회</p>
+            <p class="text-ink-500 text-xs">4층 꿈여행진로교실 (참관 소감 및 수업 성찰 나눔)</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 3. OPEN CLASSES & LESSON PLANS ==================== -->
+    <section id="section-classes" class="px-6 pt-8 pb-7 border-b border-paper-200 bg-paper-100/60">
+      <div class="flex items-end justify-between mb-3">
+        <div>
+          <span class="text-[10px] font-bold tracking-[0.15em] uppercase text-forest-700 block mb-0.5">OPEN CLASSES & LESSON PLANS</span>
+          <h2 class="font-serif text-lg font-bold text-ink-900">공개 수업 및 과정안 안내</h2>
+        </div>
+        <a href="https://docs.google.com/presentation/d/1IR-BTZCYyhxH32vfEI7ogHkk7HoYfo5MBYHqpJoptFU/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-forest-800 bg-forest-50 border border-forest-200 px-3 py-1.5 rounded-lg hover:bg-forest-100 transition">
+          전체 과정안 슬라이드 열기 ↗
+        </a>
+      </div>
+      <p class="text-xs text-ink-500 mb-4 leading-relaxed">
+        각 수업의 <strong>수업 과정안 보기</strong>를 누르면 해당 선생님의 과정안 슬라이드 페이지로 바로 이동합니다.
+      </p>
+
+      <!-- Period Filter Tabs -->
+      <div class="grid grid-cols-3 gap-1.5 p-1 bg-paper-200/80 rounded-xl mb-5">
+        <button onclick="filterPeriod('all')" id="tab-period-all" class="py-2 rounded-lg text-xs font-bold transition bg-paper-50 text-ink-900 shadow-sm">
+          전체 (10)
+        </button>
+        <button onclick="filterPeriod(5)" id="tab-period-5" class="py-2 rounded-lg text-xs font-medium transition text-ink-500 hover:text-ink-900">
+          5교시 (13:30)
+        </button>
+        <button onclick="filterPeriod(6)" id="tab-period-6" class="py-2 rounded-lg text-xs font-medium transition text-ink-500 hover:text-ink-900">
+          6교시 (14:25)
+        </button>
+      </div>
+
+      <!-- Class Cards Container -->
+      <div id="classCardsContainer" class="space-y-3">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <!-- ==================== 4. SCHOOL FLOOR PLAN ==================== -->
+    <section id="section-map" class="px-6 pt-8 pb-7 border-b border-paper-200">
+      <div class="flex items-center justify-between mb-4">
+        <div>
+          <span class="text-[10px] font-bold tracking-[0.15em] uppercase text-forest-700 block mb-0.5">FLOOR GUIDE</span>
+          <h2 class="font-serif text-lg font-bold text-ink-900">층별 교실 및 협의회실 배치도</h2>
+        </div>
+        <button onclick="openFloorModal()" class="text-xs font-semibold text-forest-800 bg-forest-50 border border-forest-200 px-3 py-1.5 rounded-lg hover:bg-forest-100 transition">
+          배치도 확대 보기
+        </button>
+      </div>
+
+      <!-- Floor Quick Summary Table -->
+      <div class="divide-y divide-paper-200 border border-paper-200 rounded-xl overflow-hidden mb-4 text-xs bg-white">
+        <div class="flex items-center gap-3 p-2.5">
+          <span class="w-14 text-center py-1 rounded bg-paper-100 text-ink-700 font-bold shrink-0">5층</span>
+          <div class="flex flex-wrap gap-1.5 text-ink-700">
+            <span class="px-2 py-0.5 rounded bg-paper-50 border border-paper-200">[5교시] <strong>1-1</strong> 국어(김명진)</span>
+            <span class="px-2 py-0.5 rounded bg-paper-50 border border-paper-200">[6교시] <strong>1-6</strong> 영어(송지은)</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 p-2.5 bg-terracotta-50/50">
+          <span class="w-14 text-center py-1 rounded bg-terracotta-600 text-white font-bold shrink-0">4층</span>
+          <div class="flex flex-wrap gap-1.5 items-center text-ink-700">
+            <span class="px-2 py-0.5 rounded bg-terracotta-100 text-terracotta-800 font-bold border border-terracotta-200">★ 꿈여행진로교실 (협의회)</span>
+            <span class="px-2 py-0.5 rounded bg-white border border-paper-200">[5교시] <strong>1-10</strong> 기가(신수민)</span>
+            <span class="px-2 py-0.5 rounded bg-white border border-paper-200">[6교시] <strong>2-2</strong> 역사(박혜정)</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 p-2.5">
+          <span class="w-14 text-center py-1 rounded bg-paper-100 text-ink-700 font-bold shrink-0">3층</span>
+          <div class="flex flex-wrap gap-1.5 text-ink-700">
+            <span class="px-2 py-0.5 rounded bg-paper-50 border border-paper-200">[5교시] <strong>기술가정실</strong> 2-8 기가(김찬진)</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 p-2.5">
+          <span class="w-14 text-center py-1 rounded bg-paper-100 text-ink-700 font-bold shrink-0">2층</span>
+          <div class="flex flex-wrap gap-1.5 text-ink-700">
+            <span class="px-2 py-0.5 rounded bg-paper-50 border border-paper-200">[5교시] <strong>3-2</strong> 진로(배연화)</span>
+            <span class="px-2 py-0.5 rounded bg-paper-50 border border-paper-200">[6교시] <strong>컴퓨터실</strong> 3-5 정보(구지윤)</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 p-2.5">
+          <span class="w-14 text-center py-1 rounded bg-paper-100 text-ink-700 font-bold shrink-0">1층·야외</span>
+          <div class="flex flex-wrap gap-1.5 text-ink-700">
+            <span class="px-2 py-0.5 rounded bg-paper-50 border border-paper-200">[5교시] <strong>3-9</strong> 사회(조은빈)</span>
+            <span class="px-2 py-0.5 rounded bg-paper-50 border border-paper-200">[5교시] <strong>농구장</strong> 3-10 체육(민현지)</span>
+            <span class="px-2 py-0.5 rounded bg-paper-50 border border-paper-200">[6교시] <strong>3-9</strong> 국어(홍진경)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floorplan Image Card -->
+      <div onclick="openFloorModal()" class="group relative rounded-xl overflow-hidden border border-paper-300 cursor-pointer bg-white">
+        <img src="floorplan.png" alt="2026학년도 용인신촌중학교 교사 배치도" class="w-full h-auto object-contain" />
+        <div class="absolute bottom-3 right-3">
+          <span class="bg-ink-900/85 text-paper-50 text-[11px] font-medium px-3 py-1.5 rounded-full shadow">
+            터치하여 크게 보기
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 5. INTERACTIVE OBSERVATION BOARD (수업 참관록) ==================== -->
+    <section id="section-guestbook" class="px-6 pt-8 pb-9 bg-paper-100/40">
+      <div class="flex flex-wrap items-end justify-between gap-2 mb-2">
+        <div>
+          <span class="text-[10px] font-bold tracking-[0.15em] uppercase text-terracotta-600 block mb-0.5">REFLECTION & SHARING</span>
+          <h2 class="font-serif text-lg font-bold text-ink-900">실시간 수업 참관록 나눔 보드</h2>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <button onclick="toggleWideMode()" id="btnWideMode" class="text-[11px] font-semibold text-ink-700 bg-white border border-paper-300 px-2.5 py-1 rounded-lg hover:bg-paper-100 transition">
+            협의회 화면모드
+          </button>
+          <button onclick="exportObservationsCSV()" class="text-[11px] font-semibold text-forest-800 bg-forest-50 border border-forest-200 px-2.5 py-1 rounded-lg hover:bg-forest-100 transition">
+            CSV 저장
+          </button>
+        </div>
+      </div>
+      <p class="text-xs text-ink-500 mb-5 leading-relaxed">
+        수업에서 인상 깊었던 배움의 장면과 함께 나누고 싶은 질문을 남겨주세요. 작성된 내용은 <strong>4층 꿈여행진로교실 협의회</strong>에서 함께 보며 이야기 나눕니다.
+      </p>
+
+      <!-- Observation Submission Form -->
+      <form id="observationForm" onsubmit="submitObservation(event)" class="bg-white border border-paper-300 rounded-xl p-5 shadow-sm mb-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-paper-200 pb-3">
+          <span class="text-xs font-bold text-forest-800">
+            수업 참관록 작성하기
+          </span>
+          <span id="syncStatusBadge" class="text-[11px] font-medium px-2 py-0.5 rounded bg-forest-50 text-forest-700">
+            실시간 공유 보드
+          </span>
+        </div>
+
+        <!-- 1. 참관 수업 선택 -->
+        <div>
+          <label for="obsClassSelect" class="block text-xs font-semibold text-ink-700 mb-1.5">참관하신 수업 선택 <span class="text-terracotta-600">*</span></label>
+          <select id="obsClassSelect" required class="w-full rounded-lg border border-paper-300 bg-paper-50 px-3 py-2.5 text-xs sm:text-sm font-medium text-ink-900 focus:border-forest-700 focus:bg-white focus:outline-none">
+            <option value="">-- 참관 수업을 선택해 주세요 --</option>
+          </select>
+        </div>
+
+        <!-- 2. 작성자 정보 -->
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label for="obsSchool" class="block text-xs font-semibold text-ink-700 mb-1.5">소속 학교 (또는 지역)</label>
+            <input type="text" id="obsSchool" placeholder="예: 용인신촌중" class="w-full rounded-lg border border-paper-300 bg-paper-50/50 px-3 py-2 text-xs sm:text-sm focus:border-forest-700 focus:bg-white focus:outline-none" />
+          </div>
+          <div>
+            <label for="obsAuthor" class="block text-xs font-semibold text-ink-700 mb-1.5">성함 (선생님) <span class="text-terracotta-600">*</span></label>
+            <input type="text" id="obsAuthor" required placeholder="예: 홍길동" class="w-full rounded-lg border border-paper-300 bg-paper-50/50 px-3 py-2 text-xs sm:text-sm focus:border-forest-700 focus:bg-white focus:outline-none" />
+          </div>
+        </div>
+
+        <!-- 3. 참관 관점 태그 선택 -->
+        <div>
+          <label class="block text-xs font-semibold text-ink-700 mb-1.5">인상 깊었던 영역 (선택)</label>
+          <div class="flex flex-wrap gap-1.5" id="obsTagsContainer">
+            <button type="button" onclick="toggleObsTag(this)" data-tag="학생 주도성·참여" class="obs-tag-btn px-2.5 py-1 rounded-md text-xs font-medium border border-paper-300 bg-paper-50 text-ink-700 transition">
+              학생 주도성·참여
+            </button>
+            <button type="button" onclick="toggleObsTag(this)" data-tag="학습으로의 평가·피드백" class="obs-tag-btn px-2.5 py-1 rounded-md text-xs font-medium border border-paper-300 bg-paper-50 text-ink-700 transition">
+              학습으로의 평가·피드백
+            </button>
+            <button type="button" onclick="toggleObsTag(this)" data-tag="질문과 탐구 중심" class="obs-tag-btn px-2.5 py-1 rounded-md text-xs font-medium border border-paper-300 bg-paper-50 text-ink-700 transition">
+              질문과 탐구 중심
+            </button>
+            <button type="button" onclick="toggleObsTag(this)" data-tag="매체·도구 활용" class="obs-tag-btn px-2.5 py-1 rounded-md text-xs font-medium border border-paper-300 bg-paper-50 text-ink-700 transition">
+              매체·도구 활용
+            </button>
+            <button type="button" onclick="toggleObsTag(this)" data-tag="삶과 연결된 문제해결" class="obs-tag-btn px-2.5 py-1 rounded-md text-xs font-medium border border-paper-300 bg-paper-50 text-ink-700 transition">
+              삶과 연결된 문제해결
+            </button>
+          </div>
+        </div>
+
+        <!-- 4. 참관 소감 및 배움 나눔 -->
+        <div>
+          <label for="obsContent" class="block text-xs font-semibold text-ink-700 mb-1.5">
+            참관 소감 및 배움·성찰 나눔 <span class="text-terracotta-600">*</span>
+          </label>
+          <textarea id="obsContent" required rows="3" placeholder="• 수업에서 인상 깊었던 장면과 학생들의 배움 모습&#10;• 내 수업에 적용해보고 싶은 점 또는 수업 교사에게 전하고 싶은 말씀" class="w-full rounded-lg border border-paper-300 bg-paper-50/50 p-3 text-xs sm:text-sm leading-relaxed focus:border-forest-700 focus:bg-white focus:outline-none"></textarea>
+        </div>
+
+        <!-- 5. 협의회 질문 (선택) -->
+        <div>
+          <label for="obsQuestion" class="block text-xs font-semibold text-ink-700 mb-1.5">
+            협의회 시간에 함께 나누고 싶은 질문 (선택)
+          </label>
+          <input type="text" id="obsQuestion" placeholder="예: 모둠 활동 중 개별 피드백은 주로 어떤 방식으로 진행하셨나요?" class="w-full rounded-lg border border-paper-300 bg-paper-50/50 px-3 py-2 text-xs sm:text-sm focus:border-forest-700 focus:bg-white focus:outline-none" />
+        </div>
+
+        <button type="submit" id="obsSubmitBtn" class="w-full py-3 rounded-lg bg-forest-800 hover:bg-forest-900 text-paper-50 font-bold text-xs sm:text-sm transition">
+          참관록 등록하기
+        </button>
+      </form>
+
+      <!-- Board Filter Bar -->
+      <div class="mb-4">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-bold text-ink-700">수업별 참관록 모아보기</span>
+          <button onclick="refreshObservations()" class="text-xs font-medium text-forest-700 hover:underline">
+            새로고침
+          </button>
+        </div>
+        <div class="flex gap-1.5 overflow-x-auto hide-scrollbar pb-1" id="boardFilterChips">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Shared Feed Cards Grid -->
+      <div id="observationsFeed" class="grid grid-cols-1 gap-3">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <!-- ==================== 6. OFFICIAL NOTICE & FOOTER ==================== -->
+    <footer class="px-6 py-8 bg-forest-900 text-paper-200 text-xs space-y-5">
+      <div class="bg-forest-800/70 border border-white/10 rounded-xl p-4 space-y-2">
+        <h3 class="text-paper-50 font-bold text-xs tracking-wide">
+          행정 및 출장 안내
+        </h3>
+        <p class="leading-relaxed text-paper-200/90">
+          • <strong>출장 신청 근거 공문:</strong> 출장 신청 시 근거 공문은 안내 공문으로 갈음합니다.<br />
+          <span class="text-paper-300/70 text-[11px]">
+            (경기도교육청 중등교육과-17204(2026.10.8.) / 용인신촌중학교-14167 「2026 경기 중등 하반기 수업나눔한마당 안내 자료 배포」)
+          </span>
+        </p>
+        <p class="leading-relaxed text-paper-200/90">
+          • <strong>협의회 참석 안내:</strong> 수업 참관 후 <strong>4층 꿈여행진로교실</strong>에서 진행되는 수업 나눔 협의회(5교시 참관→6교시 협의회 / 6교시 참관→7교시 협의회)에 함께해 주시기 바랍니다.
+        </p>
+      </div>
+
+      <div class="text-center pt-1 text-paper-300/70 space-y-1">
+        <p class="font-serif font-bold text-paper-100 text-sm">용인신촌중학교</p>
+        <p class="text-[11px]">「AI 중점학교」 · 「학습으로의 평가로 주도성을 키우는 학교」 · 「세계시민교육 실천학교」</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- ==================== LESSON PLAN SLIDE MODAL (네이티브 고운바탕+프리텐다드 렌더링) ==================== -->
+  <div id="slideModal" class="fixed inset-0 z-50 hidden bg-ink-900/85 backdrop-blur-sm flex-col justify-between p-2.5 sm:p-5" onclick="if(event.target === this) closeSlideModal()">
+    <!-- Modal Header -->
+    <div class="flex items-center justify-between gap-2 text-paper-50 max-w-3xl mx-auto w-full py-2 px-1">
+      <div class="min-w-0">
+        <span id="slideModalSubtitle" class="text-[11px] font-semibold text-[#F3C6B6] block truncate">5교시 수업 과정안</span>
+        <h3 id="slideModalTitle" class="font-serif font-bold text-sm sm:text-base truncate">수업 과정안</h3>
+      </div>
+      <div class="flex items-center gap-1.5 shrink-0">
+        <button type="button" id="slideModalModeBtn" onclick="toggleSlideViewMode()"
+           class="px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 border border-white/15 text-paper-100 font-medium text-[11px] transition">
+          원본 슬라이드 보기
+        </button>
+        <a id="slideModalExternalBtn" href="#" target="_blank" rel="noopener noreferrer"
+           class="px-2.5 py-1.5 rounded-lg bg-forest-800 hover:bg-forest-700 border border-white/15 text-paper-50 font-semibold text-[11px] transition flex items-center gap-1">
+          <span>새 창</span>
+          <span>↗</span>
+        </a>
+        <button type="button" onclick="closeSlideModal()" class="px-3 py-1.5 rounded-lg bg-white/15 hover:bg-white/25 text-white font-semibold text-xs transition">
+          ✕ 닫기
+        </button>
+      </div>
+    </div>
+
+    <!-- Modal Body -->
+    <div class="flex-1 overflow-y-auto my-1.5 max-w-3xl mx-auto w-full rounded-xl bg-paper-50 border border-paper-300 shadow-2xl relative">
+      <!-- Loading Indicator -->
+      <div id="slideModalLoading" class="py-20 flex flex-col items-center justify-center gap-3 text-ink-700 text-xs font-medium">
+        <div class="w-6 h-6 border-2 border-forest-800 border-t-transparent rounded-full animate-spin"></div>
+        <span>구글 슬라이드에서 최신 과정안을 불러오는 중입니다...</span>
+      </div>
+
+      <!-- 1. Native Editorial Lesson Plan View (Gowun Batang + Pretendard) -->
+      <div id="slideModalNativeContent" class="hidden p-4 sm:p-6 space-y-5 text-ink-900">
+        <!-- Populated dynamically by JS -->
+      </div>
+
+      <!-- 2. Raw Slide Image View (Optional Toggle) -->
+      <div id="slideModalRawView" class="hidden p-2 sm:p-4 bg-paper-100">
+        <img id="slideModalImg" src="" alt="수업 과정안 슬라이드 원본"
+             class="w-full h-auto object-contain rounded-lg bg-white shadow-md select-none" />
+      </div>
+    </div>
+
+    <!-- Modal Footer -->
+    <div class="max-w-3xl mx-auto w-full bg-forest-900 border border-white/15 rounded-xl p-2.5 sm:p-3 flex items-center justify-between gap-2">
+      <p class="text-[11px] text-paper-200 hidden sm:block pl-1">
+        구글 슬라이드에 작성된 최신 내용이 실시간으로 반영됩니다.
+      </p>
+      <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+        <button type="button" id="slideModalWriteObsBtn" onclick=""
+                class="flex-1 sm:flex-initial py-2 px-4 rounded-lg bg-terracotta-600 hover:bg-terracotta-700 text-white font-bold text-xs transition text-center">
+          이 수업 참관록 바로 작성하기
+        </button>
+        <button type="button" onclick="closeSlideModal()"
+                class="py-2 px-3.5 rounded-lg bg-white/10 hover:bg-white/20 text-paper-100 font-semibold text-xs transition">
+          닫기
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== FLOOR PLAN LIGHTBOX MODAL ==================== -->
+  <div id="floorModal" class="fixed inset-0 z-50 hidden bg-ink-900/90 backdrop-blur-sm flex-col justify-between p-3 sm:p-6">
+    <div class="flex items-center justify-between text-paper-50 max-w-5xl mx-auto w-full py-2">
+      <div>
+        <h3 class="font-serif font-bold text-sm sm:text-base">2026학년도 용인신촌중학교 교사 배치도</h3>
+        <p class="text-[11px] text-paper-300">화면을 확대하여 층별 교실 위치를 확인하실 수 있습니다.</p>
+      </div>
+      <button onclick="closeFloorModal()" class="px-3.5 py-1.5 rounded-lg bg-white/15 hover:bg-white/25 text-white font-semibold text-xs">
+        닫기
+      </button>
+    </div>
+    <div class="flex-1 overflow-auto flex items-center justify-center my-2">
+      <img src="floorplan.png" alt="교사 배치도 확대" class="max-w-full max-h-full object-contain rounded-lg bg-white p-2" />
+    </div>
+    <div class="max-w-5xl mx-auto w-full bg-forest-900 border border-white/15 rounded-lg p-3 text-xs text-paper-100 flex flex-wrap gap-2 justify-center">
+      <span><strong>5층:</strong> 1-1(국어), 1-6(영어)</span>
+      <span>·</span>
+      <span class="text-[#F3C6B6] font-bold"><strong>4층:</strong> ★꿈여행진로교실(협의회), 1-10(기가), 2-2(역사)</span>
+      <span>·</span>
+      <span><strong>3층:</strong> 기술가정실(2-8 기가)</span>
+      <span>·</span>
+      <span><strong>2층:</strong> 3-2(진로), 컴퓨터실(3-5 정보)</span>
+      <span>·</span>
+      <span><strong>1층/야외:</strong> 3-9(사회/국어), 농구장(3-10 체육)</span>
+    </div>
+  </div>
+
+  <!-- ==================== TOAST NOTIFICATION ==================== -->
+  <div id="toastMsg" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 hidden bg-ink-900 text-paper-50 text-xs font-medium px-4 py-3 rounded-xl shadow-lg border border-white/10 items-center gap-2">
+    <span id="toastText">알림</span>
+  </div>
+
+  <!-- ==================== APPLICATION SCRIPT ==================== -->
+  <script>
+    let currentPeriodFilter = 'all';
+    let currentBoardFilter = 'all';
+    let isWideMode = false;
+    let selectedTags = new Set();
+
+    const STORAGE_KEY = 'shinchon_20261027_observations_v1';
+    const LIKES_KEY = 'shinchon_20261027_likes_v1';
+
+    const INITIAL_OBSERVATIONS = [
+      {
+        id: "welcome-guide-1",
+        classId: "all",
+        classLabel: "전체 안내",
+        school: "용인신촌중학교",
+        author: "수업나눔 진행팀",
+        tags: ["학생 주도성·참여", "학습으로의 평가·피드백"],
+        content: "용인신촌중학교 수업 공개에 오신 선생님들을 환영합니다. 수업을 참관하시면서 발견한 학생들의 배움 장면이나 인상 깊었던 점을 이곳에 자유롭게 남겨주세요.",
+        question: "5교시 참관 후에는 6교시에, 6교시 참관 후에는 7교시에 4층 꿈여행진로교실에서 함께 이야기를 나눕니다.",
+        createdAt: "2026. 10. 27. 13:00",
+        likes: 8
+      }
+    ];
+
+    let observations = [];
+    let likedIds = new Set();
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initSelectOptions();
+      renderClassCards();
+      renderBoardFilterChips();
+      loadLikedIds();
+      loadObservations();
+    });
+
+    function renderClassCards() {
+      const container = document.getElementById('classCardsContainer');
+      const filtered = CONFIG.CLASSES.filter(c => currentPeriodFilter === 'all' || c.period === currentPeriodFilter);
+
+      let html = '';
+      let lastPeriod = null;
+
+      filtered.forEach(cls => {
+        if (currentPeriodFilter === 'all' && cls.period !== lastPeriod) {
+          lastPeriod = cls.period;
+          const periodTitle = cls.period === 5
+            ? '5교시 공개 수업 (13:30 ~ 14:15)'
+            : '6교시 공개 수업 (14:25 ~ 15:10)';
+          const confNotice = cls.period === 5
+            ? '6교시(14:25~) 4층 꿈여행진로교실 협의회'
+            : '7교시(15:20~) 4층 꿈여행진로교실 협의회';
+
+          html += `
+            <div class="pt-3 pb-1.5 flex flex-wrap items-baseline justify-between gap-1 border-b border-paper-300">
+              <h3 class="font-serif text-sm font-bold text-ink-900">
+                ${periodTitle}
+              </h3>
+              <span class="text-[11px] font-semibold text-terracotta-700">
+                참관 후 ${confNotice}
+              </span>
+            </div>
+          `;
+        }
+
+        const hasSlide = cls.slideUrl && cls.slideUrl.trim() !== '';
+        const obsCount = observations.filter(o => o.classId === cls.id).length;
+
+        html += `
+          <div class="bg-white rounded-xl border border-paper-200 border-l-4 ${cls.accent} p-4 shadow-sm card-transition">
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <div class="flex flex-wrap items-center gap-1.5">
+                <span class="px-2 py-0.5 text-[11px] font-semibold rounded bg-paper-100 text-ink-700">
+                  ${cls.period}교시
+                </span>
+                <span class="px-2 py-0.5 text-xs font-bold rounded bg-forest-50 text-forest-800 border border-forest-200">
+                  ${cls.subject}
+                </span>
+                <span class="text-xs font-semibold text-ink-700">${cls.teacher} 선생님</span>
+              </div>
+              <span class="px-2.5 py-0.5 rounded bg-paper-100 text-ink-900 font-bold text-xs shrink-0">
+                ${cls.room} · ${cls.floor}
+              </span>
+            </div>
+
+            <h4 class="font-serif text-[15px] sm:text-base font-bold text-ink-900 leading-snug mb-2.5">
+              ${cls.title}
+            </h4>
+
+            <div class="flex flex-wrap items-center justify-between gap-2 text-xs text-ink-500 bg-paper-50 border border-paper-200/70 rounded-lg px-3 py-2 mb-3">
+              <div>
+                <span class="font-semibold text-ink-700">대상</span> ${cls.targetClass}
+                <span class="mx-1.5 text-paper-300">|</span>
+                <span class="font-semibold text-ink-700">위치</span> ${cls.floorDetail}
+              </div>
+              <div class="text-[11px] font-medium text-terracotta-700">
+                협의회: ${cls.conferenceTime}
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2">
+              ${hasSlide ? `
+                <button type="button" onclick="openSlideModal('${cls.id}')"
+                   class="py-2 px-3 rounded-lg bg-forest-800 hover:bg-forest-900 text-paper-50 font-semibold text-xs flex items-center justify-center gap-1.5 transition">
+                  수업 과정안 보기
+                </button>
+              ` : `
+                <button type="button" onclick="alertSlidePending('${cls.subject}', '${cls.teacher}')"
+                   class="py-2 px-3 rounded-lg bg-paper-100 hover:bg-paper-200 text-ink-700 font-semibold text-xs flex items-center justify-center gap-1.5 border border-paper-300 transition">
+                  수업 과정안 슬라이드
+                </button>
+              `}
+              <button type="button" onclick="jumpToWriteObservation('${cls.id}')"
+                 class="py-2 px-3 rounded-lg bg-white hover:bg-terracotta-50 text-terracotta-700 border border-terracotta-200 font-semibold text-xs flex items-center justify-center gap-1.5 transition">
+                참관록 작성 ${obsCount > 0 ? `<span class="px-1.5 py-0.2 bg-terracotta-600 text-white rounded-full text-[10px]">${obsCount}</span>` : ''}
+              </button>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function filterPeriod(period) {
+      currentPeriodFilter = period;
+      ['all', 5, 6].forEach(p => {
+        const btn = document.getElementById(`tab-period-${p}`);
+        if (p === period) {
+          btn.className = 'py-2 rounded-lg text-xs font-bold transition bg-paper-50 text-ink-900 shadow-sm';
+        } else {
+          btn.className = 'py-2 rounded-lg text-xs font-medium transition text-ink-500 hover:text-ink-900';
+        }
+      });
+      renderClassCards();
+    }
+
+    function alertSlidePending(subject, teacher) {
+      showToast(`[${subject} · ${teacher} 선생님] 수업 과정안 슬라이드 연결 준비 중입니다.`);
+    }
+
+    function initSelectOptions() {
+      const select = document.getElementById('obsClassSelect');
+      let html = '<option value="">-- 참관하신 수업을 선택해 주세요 --</option>';
+
+      const p5 = CONFIG.CLASSES.filter(c => c.period === 5);
+      const p6 = CONFIG.CLASSES.filter(c => c.period === 6);
+
+      html += '<optgroup label="5교시 수업 (13:30~14:15)">';
+      p5.forEach(c => {
+        html += `<option value="${c.id}">[5교시] ${c.subject}(${c.teacher}) - ${c.room} (${c.title})</option>`;
+      });
+      html += '</optgroup>';
+
+      html += '<optgroup label="6교시 수업 (14:25~15:10)">';
+      p6.forEach(c => {
+        html += `<option value="${c.id}">[6교시] ${c.subject}(${c.teacher}) - ${c.room} (${c.title})</option>`;
+      });
+      html += '</optgroup>';
+
+      select.innerHTML = html;
+    }
+
+    function renderBoardFilterChips() {
+      const container = document.getElementById('boardFilterChips');
+      const chips = [
+        { id: 'all', label: '전체 보기' },
+        { id: 'period-5', label: '5교시 수업 (6교시 협의회)' },
+        { id: 'period-6', label: '6교시 수업 (7교시 협의회)' },
+        ...CONFIG.CLASSES.map(c => ({
+          id: c.id,
+          label: `${c.subject}(${c.teacher})`
+        }))
+      ];
+
+      container.innerHTML = chips.map(chip => {
+        const active = currentBoardFilter === chip.id;
+        return `
+          <button type="button" onclick="setBoardFilter('${chip.id}')"
+            class="shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition border ${
+              active
+                ? 'bg-forest-800 text-paper-50 border-forest-800'
+                : 'bg-white text-ink-700 border-paper-300 hover:bg-paper-100'
+            }">
+            ${chip.label}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function setBoardFilter(filterId) {
+      currentBoardFilter = filterId;
+      renderBoardFilterChips();
+      renderObservationsFeed();
+    }
+
+    function jumpToWriteObservation(classId) {
+      const select = document.getElementById('obsClassSelect');
+      select.value = classId;
+      setBoardFilter(classId);
+      document.getElementById('section-guestbook').scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => {
+        document.getElementById('obsContent').focus();
+      }, 450);
+    }
+
+    function toggleObsTag(btn) {
+      const tag = btn.getAttribute('data-tag');
+      if (selectedTags.has(tag)) {
+        selectedTags.delete(tag);
+        btn.className = 'obs-tag-btn px-2.5 py-1 rounded-md text-xs font-medium border border-paper-300 bg-paper-50 text-ink-700 transition';
+      } else {
+        selectedTags.add(tag);
+        btn.className = 'obs-tag-btn px-2.5 py-1 rounded-md text-xs font-semibold border border-forest-700 bg-forest-50 text-forest-800 transition';
+      }
+    }
+
+    async function loadObservations() {
+      const badge = document.getElementById('syncStatusBadge');
+
+      if (CONFIG.SHARED_API_URL && CONFIG.SHARED_API_URL.trim() !== '') {
+        try {
+          badge.textContent = '동기화 중...';
+          const res = await fetch(CONFIG.SHARED_API_URL);
+          if (res.ok) {
+            const data = await res.json();
+            if (Array.isArray(data)) {
+              observations = data;
+              localStorage.setItem(STORAGE_KEY, JSON.stringify(observations));
+              badge.textContent = '실시간 연동됨';
+              renderObservationsFeed();
+              renderClassCards();
+              return;
+            }
+          }
+        } catch (err) {
+          console.warn('Cloud sync fallback to localStorage:', err);
+        }
+      }
+
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        try {
+          observations = JSON.parse(saved);
+        } catch (e) {
+          observations = [...INITIAL_OBSERVATIONS];
+        }
+      } else {
+        observations = [...INITIAL_OBSERVATIONS];
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(observations));
+      }
+
+      renderObservationsFeed();
+      renderClassCards();
+    }
+
+    async function submitObservation(e) {
+      e.preventDefault();
+      const classId = document.getElementById('obsClassSelect').value;
+      const school = document.getElementById('obsSchool').value.trim() || '참관교사';
+      const author = document.getElementById('obsAuthor').value.trim();
+      const content = document.getElementById('obsContent').value.trim();
+      const question = document.getElementById('obsQuestion').value.trim();
+
+      if (!classId || !author || !content) {
+        showToast('참관 수업, 성함, 참관 소감을 입력해 주세요.');
+        return;
+      }
+
+      const clsObj = CONFIG.CLASSES.find(c => c.id === classId);
+      const classLabel = clsObj
+        ? `[${clsObj.period}교시] ${clsObj.subject}(${clsObj.teacher}) · ${clsObj.room}`
+        : '수업 참관';
+
+      const now = new Date();
+      const timeStr = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+
+      const newEntry = {
+        id: 'obs-' + Date.now() + '-' + Math.random().toString(36).substring(2, 6),
+        classId,
+        period: clsObj ? clsObj.period : 5,
+        classLabel,
+        school,
+        author,
+        tags: Array.from(selectedTags),
+        content,
+        question,
+        createdAt: `2026. 10. 27. ${timeStr}`,
+        likes: 0
+      };
+
+      observations.unshift(newEntry);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(observations));
+
+      if (CONFIG.SHARED_API_URL && CONFIG.SHARED_API_URL.trim() !== '') {
+        try {
+          fetch(CONFIG.SHARED_API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify({ action: 'create', entry: newEntry })
+          });
+        } catch (err) {
+          console.warn('Cloud post error:', err);
+        }
+      }
+
+      document.getElementById('obsContent').value = '';
+      document.getElementById('obsQuestion').value = '';
+      selectedTags.clear();
+      document.querySelectorAll('.obs-tag-btn').forEach(btn => {
+        btn.className = 'obs-tag-btn px-2.5 py-1 rounded-md text-xs font-medium border border-paper-300 bg-paper-50 text-ink-700 transition';
+      });
+
+      renderObservationsFeed();
+      renderClassCards();
+      showToast('수업 참관록이 등록되었습니다.');
+    }
+
+    function renderObservationsFeed() {
+      const feed = document.getElementById('observationsFeed');
+
+      const filtered = observations.filter(item => {
+        if (currentBoardFilter === 'all') return true;
+        if (currentBoardFilter === 'period-5') {
+          const cls = CONFIG.CLASSES.find(c => c.id === item.classId);
+          return (cls && cls.period === 5) || item.period === 5;
+        }
+        if (currentBoardFilter === 'period-6') {
+          const cls = CONFIG.CLASSES.find(c => c.id === item.classId);
+          return (cls && cls.period === 6) || item.period === 6;
+        }
+        return item.classId === currentBoardFilter;
+      });
+
+      if (filtered.length === 0) {
+        feed.innerHTML = `
+          <div class="col-span-full bg-white border border-dashed border-paper-300 rounded-xl p-8 text-center text-ink-500 text-xs space-y-1">
+            <p class="font-semibold text-ink-700">선택하신 수업에 아직 등록된 참관록이 없습니다.</p>
+            <p>첫 번째 참관 소감을 남겨주시면 협의회가 더욱 풍성해집니다.</p>
+          </div>
+        `;
+        return;
+      }
+
+      feed.innerHTML = filtered.map(item => {
+        const isLiked = likedIds.has(item.id);
+        const tagsHtml = (item.tags && item.tags.length > 0)
+          ? `<div class="flex flex-wrap gap-1 mb-2.5">
+              ${item.tags.map(t => `<span class="px-2 py-0.5 rounded bg-paper-100 text-ink-700 text-[11px] font-medium">${escapeHtml(t)}</span>`).join('')}
+             </div>`
+          : '';
+
+        const questionHtml = item.question
+          ? `<div class="mt-3 bg-terracotta-50 border border-terracotta-200/80 rounded-lg p-3 text-xs text-ink-900">
+               <span class="font-bold text-terracotta-700 block mb-0.5">함께 나누고 싶은 질문</span>
+               ${escapeHtml(item.question)}
+             </div>`
+          : '';
+
+        return `
+          <div class="bg-white rounded-xl border border-paper-200 p-4 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-2.5">
+                <span class="px-2 py-0.5 rounded bg-forest-50 text-forest-800 border border-forest-200 text-[11px] font-bold">
+                  ${escapeHtml(item.classLabel)}
+                </span>
+                <span class="text-[11px] text-ink-400">${escapeHtml(item.createdAt || '')}</span>
+              </div>
+
+              ${tagsHtml}
+
+              <p class="text-xs sm:text-sm text-ink-900 whitespace-pre-line leading-relaxed">
+                ${escapeHtml(item.content)}
+              </p>
+
+              ${questionHtml}
+            </div>
+
+            <div class="flex items-center justify-between pt-3 mt-3 border-t border-paper-100 text-xs">
+              <div class="font-semibold text-ink-700">
+                <span class="text-ink-500 font-normal">${escapeHtml(item.school)}</span> · ${escapeHtml(item.author)} 선생님
+              </div>
+              <div class="flex items-center gap-2">
+                <button type="button" onclick="toggleLike('${item.id}')"
+                  class="px-2.5 py-1 rounded-full border text-xs font-semibold flex items-center gap-1 transition ${
+                    isLiked
+                      ? 'bg-terracotta-50 border-terracotta-200 text-terracotta-700'
+                      : 'bg-paper-50 border-paper-200 text-ink-500 hover:bg-terracotta-50 hover:text-terracotta-700'
+                  }">
+                  <span>♥</span>
+                  <span>공감 ${item.likes || 0}</span>
+                </button>
+                ${item.id !== 'welcome-guide-1' ? `
+                  <button type="button" onclick="deleteObservation('${item.id}')" class="text-ink-400 hover:text-ink-700 text-xs px-1" title="삭제">
+                    ✕
+                  </button>
+                ` : ''}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function loadLikedIds() {
+      try {
+        const raw = localStorage.getItem(LIKES_KEY);
+        if (raw) likedIds = new Set(JSON.parse(raw));
+      } catch (e) {}
+    }
+
+    function toggleLike(id) {
+      const target = observations.find(o => o.id === id);
+      if (!target) return;
+
+      if (likedIds.has(id)) {
+        likedIds.delete(id);
+        target.likes = Math.max(0, (target.likes || 1) - 1);
+      } else {
+        likedIds.add(id);
+        target.likes = (target.likes || 0) + 1;
+      }
+
+      localStorage.setItem(LIKES_KEY, JSON.stringify(Array.from(likedIds)));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(observations));
+      renderObservationsFeed();
+    }
+
+    function deleteObservation(id) {
+      if (!confirm('이 참관록을 삭제하시겠습니까?')) return;
+      observations = observations.filter(o => o.id !== id);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(observations));
+      renderObservationsFeed();
+      renderClassCards();
+      showToast('참관록이 삭제되었습니다.');
+    }
+
+    function refreshObservations() {
+      loadObservations();
+      showToast('참관록 보드를 새로고침했습니다.');
+    }
+
+    function toggleWideMode() {
+      isWideMode = !isWideMode;
+      const app = document.getElementById('appContainer');
+      const feed = document.getElementById('observationsFeed');
+      const btn = document.getElementById('btnWideMode');
+
+      if (isWideMode) {
+        app.classList.remove('max-w-xl');
+        app.classList.add('max-w-5xl');
+        feed.classList.remove('grid-cols-1');
+        feed.classList.add('md:grid-cols-2');
+        btn.className = 'text-[11px] font-semibold text-paper-50 bg-forest-800 border border-forest-800 px-2.5 py-1 rounded-lg transition';
+        btn.textContent = '모바일 폭으로 보기';
+        showToast('협의회용 와이드 화면 모드로 전환되었습니다.');
+      } else {
+        app.classList.remove('max-w-5xl');
+        app.classList.add('max-w-xl');
+        feed.classList.remove('md:grid-cols-2');
+        feed.classList.add('grid-cols-1');
+        btn.className = 'text-[11px] font-semibold text-ink-700 bg-white border border-paper-300 px-2.5 py-1 rounded-lg hover:bg-paper-100 transition';
+        btn.textContent = '협의회 화면모드';
+      }
+    }
+
+    function exportObservationsCSV() {
+      if (!observations || observations.length === 0) {
+        showToast('저장할 참관록 데이터가 없습니다.');
+        return;
+      }
+      const headers = ['작성일시', '참관수업', '소속학교', '성함', '인상깊은영역', '참관소감', '협의회질문', '공감수'];
+      const rows = observations.map(o => [
+        o.createdAt || '',
+        o.classLabel || '',
+        o.school || '',
+        o.author || '',
+        (o.tags || []).join(' / '),
+        (o.content || '').replace(/\n/g, ' '),
+        (o.question || '').replace(/\n/g, ' '),
+        o.likes || 0
+      ]);
+
+      const csvContent = '\uFEFF' + [headers, ...rows]
+        .map(r => r.map(field => `"${String(field).replace(/"/g, '""')}"`).join(','))
+        .join('\r\n');
+
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = '2026_용인신촌중_수업공개_참관록모음.csv';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('참관록 CSV 파일이 다운로드되었습니다.');
+    }
+
+    let currentModalClass = null;
+    let isRawSlideMode = false;
+    let cachedSlidesJson = null;
+
+    // slides_data.json 또는 내장 데이터에서 슬라이드 표 데이터를 즉시 로드 (선생님들이 슬라이드 폰트를 무엇으로 바꾸든 고운바탕+프리텐다드로 통일 렌더링)
+    async function getLiveSlideData(slideIndexNumber) {
+      let allSlides = cachedSlidesJson || (window.PRELOADED_SLIDES || null);
+      try {
+        const res = await fetch(`./slides_data.json?t=${Date.now()}`);
+        if (res.ok) {
+          allSlides = await res.json();
+          cachedSlidesJson = allSlides;
+        }
+      } catch (e) {
+        // 로컬 file:// 환경에서는 window.PRELOADED_SLIDES 사용
+      }
+
+      if (!allSlides || !allSlides[String(slideIndexNumber)]) {
+        throw new Error('Slide data not found');
+      }
+
+      const tables = allSlides[String(slideIndexNumber)];
+      let overviewTable = null;
+      let stepsTable = null;
+      let pointsTable = null;
+
+      tables.forEach(t => {
+        if (!t || !t[0] || !t[0][0]) return;
+        const firstCell = t[0][0];
+        if (firstCell.includes('단원')) overviewTable = t;
+        else if (firstCell.includes('단계')) stepsTable = t;
+        else if (firstCell.includes('참관') || firstCell.includes('중점')) pointsTable = t;
+      });
+
+      return { overviewTable, stepsTable, pointsTable };
+    }
+
+    function cleanCellText(str) {
+      if (!str) return '';
+      // 불릿만 남고 내용이 없는 기본 템플릿 문자열 정리
+      const cleaned = str
+        .split('\n')
+        .map(line => line.trim())
+        .filter(line => line !== '•' && line !== '-')
+        .join('\n')
+        .trim();
+      if (cleaned === '• [활동 1]\n\n• [활동 2]' || cleaned === '• [활동 1]\n• [활동 2]') return '';
+      return cleaned;
+    }
+
+    function formatRichText(str) {
+      const cleaned = cleanCellText(str);
+      if (!cleaned) {
+        return `<span class="text-ink-400 italic text-xs">작성 중입니다.</span>`;
+      }
+      return escapeHtml(cleaned)
+        .replace(/(\[활동\s*\d+\][^\n]*)/g, '<strong class="text-forest-800 font-bold">$1</strong>')
+        .replace(/\n/g, '<br />');
+    }
+
+    async function openSlideModal(classId) {
+      const clsIndex = CONFIG.CLASSES.findIndex(c => c.id === classId);
+      if (clsIndex === -1) return;
+      const cls = CONFIG.CLASSES[clsIndex];
+      currentModalClass = cls;
+      isRawSlideMode = false;
+
+      const modal = document.getElementById('slideModal');
+      const subtitle = document.getElementById('slideModalSubtitle');
+      const title = document.getElementById('slideModalTitle');
+      const extBtn = document.getElementById('slideModalExternalBtn');
+      const obsBtn = document.getElementById('slideModalWriteObsBtn');
+      const modeBtn = document.getElementById('slideModalModeBtn');
+      const loading = document.getElementById('slideModalLoading');
+      const nativeContent = document.getElementById('slideModalNativeContent');
+      const rawView = document.getElementById('slideModalRawView');
+      const img = document.getElementById('slideModalImg');
+
+      subtitle.textContent = `${cls.period}교시 (${cls.time}) · ${cls.subject} ${cls.teacher} 선생님 · ${cls.room}(${cls.floor})`;
+      title.textContent = cls.title;
+      extBtn.href = cls.slideUrl;
+      modeBtn.textContent = '원본 슬라이드 보기';
+      obsBtn.onclick = () => {
+        closeSlideModal();
+        jumpToWriteObservation(cls.id);
+      };
+
+      loading.classList.remove('hidden');
+      nativeContent.classList.add('hidden');
+      rawView.classList.add('hidden');
+      img.src = `https://docs.google.com/presentation/d/${CONFIG.PRESENTATION_ID}/export/svg?pageid=${cls.slidePageId}&t=${Date.now()}`;
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+
+      try {
+        // 슬라이드 3쪽(index 0 -> slide 3)부터 12쪽(index 9 -> slide 12)까지 매칭
+        const slideNumber = clsIndex + 3;
+        const { overviewTable, stepsTable, pointsTable } = await getLiveSlideData(slideNumber);
+        renderNativeLessonPlan(cls, overviewTable, stepsTable, pointsTable);
+        loading.classList.add('hidden');
+        nativeContent.classList.remove('hidden');
+      } catch (err) {
+        console.warn('Live XML parse fallback to raw SVG:', err);
+        loading.classList.add('hidden');
+        rawView.classList.remove('hidden');
+        isRawSlideMode = true;
+        modeBtn.classList.add('hidden');
+      }
+    }
+
+    function renderNativeLessonPlan(cls, overviewTable, stepsTable, pointsTable) {
+      const container = document.getElementById('slideModalNativeContent');
+
+      // 1. 수업 설계 개요 파싱
+      const ovRows = (overviewTable || []).map(r => ({
+        label: (r[0] || '').replace(/\n/g, ' '),
+        value: r[1] || ''
+      }));
+
+      // 전체가 아직 비어있는지 체크
+      const hasAnyContent =
+        ovRows.some(r => cleanCellText(r.value) !== '') ||
+        (stepsTable || []).slice(1).some(r => cleanCellText(r[1]) !== '' || cleanCellText(r[2]) !== '') ||
+        (pointsTable || []).some(r => cleanCellText(r[1]) !== '');
+
+      const emptyBanner = !hasAnyContent ? `
+        <div class="bg-terracotta-50 border border-terracotta-200 rounded-xl px-4 py-3 text-xs text-terracotta-800 flex items-center justify-between gap-2">
+          <span>현재 <strong>${cls.teacher} 선생님</strong>께서 수업 과정안을 작성 중이십니다. 작성 즉시 이곳에 실시간 반영됩니다.</span>
+        </div>
+      ` : '';
+
+      const overviewHtml = ovRows.map(r => {
+        const isFocus = r.label.includes('주안점');
+        return `
+          <div class="grid grid-cols-1 sm:grid-cols-12 border-b last:border-b-0 border-paper-200">
+            <div class="sm:col-span-3 px-3.5 py-2.5 ${isFocus ? 'bg-forest-50 text-forest-800' : 'bg-paper-100/80 text-ink-700'} font-bold text-xs flex items-center">
+              ${escapeHtml(r.label)}
+            </div>
+            <div class="sm:col-span-9 px-4 py-3 bg-white text-xs sm:text-[13.5px] leading-relaxed text-ink-900">
+              ${formatRichText(r.value)}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // 2. 과정별 수업 활동 파싱
+      const stepRows = (stepsTable || []).slice(1);
+      const stepsHtml = stepRows.map(r => {
+        const stepTitle = (r[0] || '').replace(/\n/g, ' ').trim();
+        const actText = r[1] || '';
+        const toolText = r[2] || '';
+        return `
+          <div class="bg-white rounded-xl border border-paper-200 overflow-hidden shadow-sm">
+            <div class="bg-paper-100 px-4 py-2 border-b border-paper-200 flex items-center justify-between">
+              <span class="font-serif font-bold text-xs sm:text-sm text-forest-800">${escapeHtml(stepTitle)}</span>
+              <span class="text-[11px] font-medium text-ink-500">주요 수업 활동 및 활용 도구</span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-12 divide-y sm:divide-y-0 sm:divide-x divide-paper-200">
+              <div class="sm:col-span-8 p-3.5 sm:p-4 text-xs sm:text-[13.5px] leading-relaxed text-ink-900">
+                <span class="block text-[11px] font-bold text-forest-700 mb-1">과정별 주요 수업 활동 (학생 배움 중심)</span>
+                ${formatRichText(actText)}
+              </div>
+              <div class="sm:col-span-4 p-3.5 sm:p-4 bg-paper-50/50 text-xs leading-relaxed text-ink-700">
+                <span class="block text-[11px] font-bold text-ink-500 mb-1">활용 도구·자료 및 피드백</span>
+                ${formatRichText(toolText)}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // 3. 참관 포인트 & 협의회 질문 파싱
+      const ptRows = (pointsTable || []).map(r => ({
+        label: (r[0] || '').replace(/\n/g, ' '),
+        value: r[1] || ''
+      }));
+
+      const pointsHtml = ptRows.map(r => `
+        <div class="bg-terracotta-50/70 border border-terracotta-200 rounded-xl p-4">
+          <h5 class="font-serif font-bold text-xs sm:text-sm text-terracotta-800 mb-1.5 flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-terracotta-600"></span>
+            ${escapeHtml(r.label)}
+          </h5>
+          <div class="text-xs sm:text-[13.5px] leading-relaxed text-ink-900 pl-3">
+            ${formatRichText(r.value)}
+          </div>
+        </div>
+      `).join('');
+
+      container.innerHTML = `
+        <!-- Top Banner Card -->
+        <div class="bg-forest-900 text-paper-50 rounded-xl p-4 sm:p-5 border-b-4 border-terracotta-600">
+          <div class="flex flex-wrap items-center justify-between gap-2 text-xs text-[#F3C6B6] font-semibold mb-1.5">
+            <span>${cls.period}교시 (${cls.time})  |  ${cls.subject} · ${cls.teacher} 선생님</span>
+            <span class="px-2 py-0.5 rounded bg-white/10 text-paper-50">장소: ${cls.room} (${cls.floor})</span>
+          </div>
+          <h4 class="font-serif text-lg sm:text-xl font-bold text-paper-50 leading-snug mb-2">
+            ${escapeHtml(cls.title)}
+          </h4>
+          <p class="text-[11px] sm:text-xs text-paper-200/90">
+            대상 학급: ${cls.targetClass}학급  ·  수업 나눔 협의회: ${cls.conferenceTime} (${cls.conferenceRoom})
+          </p>
+        </div>
+
+        ${emptyBanner}
+
+        <!-- 1. 수업 설계 개요 -->
+        <div>
+          <div class="flex items-baseline justify-between mb-2">
+            <h5 class="font-serif font-bold text-sm text-ink-900">1. 수업 설계 개요</h5>
+            <span class="text-[10px] font-bold tracking-wider uppercase text-forest-700">LESSON OVERVIEW</span>
+          </div>
+          <div class="border border-paper-300 rounded-xl overflow-hidden shadow-sm">
+            ${overviewHtml}
+          </div>
+        </div>
+
+        <!-- 2. 과정별 수업 활동 -->
+        <div>
+          <div class="flex items-baseline justify-between mb-2">
+            <h5 class="font-serif font-bold text-sm text-ink-900">2. 과정별 주요 수업 활동 및 활용 도구</h5>
+            <span class="text-[10px] font-bold tracking-wider uppercase text-forest-700">LEARNING ACTIVITIES</span>
+          </div>
+          <div class="space-y-2.5">
+            ${stepsHtml}
+          </div>
+        </div>
+
+        <!-- 3. 참관 포인트 및 협의회 나눔 질문 -->
+        <div>
+          <div class="flex items-baseline justify-between mb-2">
+            <h5 class="font-serif font-bold text-sm text-ink-900">3. 중점 참관 포인트 및 함께 나누고 싶은 질문</h5>
+            <span class="text-[10px] font-bold tracking-wider uppercase text-terracotta-600">FOR CONFERENCE</span>
+          </div>
+          <div class="space-y-2.5">
+            ${pointsHtml}
+          </div>
+        </div>
+      `;
+    }
+
+    function toggleSlideViewMode() {
+      isRawSlideMode = !isRawSlideMode;
+      const nativeContent = document.getElementById('slideModalNativeContent');
+      const rawView = document.getElementById('slideModalRawView');
+      const modeBtn = document.getElementById('slideModalModeBtn');
+
+      if (isRawSlideMode) {
+        nativeContent.classList.add('hidden');
+        rawView.classList.remove('hidden');
+        modeBtn.textContent = '모바일 가독성 뷰로 보기';
+      } else {
+        rawView.classList.add('hidden');
+        nativeContent.classList.remove('hidden');
+        modeBtn.textContent = '원본 슬라이드 보기';
+      }
+    }
+
+    function closeSlideModal() {
+      const modal = document.getElementById('slideModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+
+    function openFloorModal() {
+      const modal = document.getElementById('floorModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeFloorModal() {
+      const modal = document.getElementById('floorModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+
+    let toastTimer = null;
+    function showToast(msg) {
+      const toast = document.getElementById('toastMsg');
+      const text = document.getElementById('toastText');
+      text.textContent = msg;
+      toast.classList.remove('hidden');
+      toast.classList.add('flex');
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.add('hidden');
+        toast.classList.remove('flex');
+      }, 2800);
+    }
+
+    function escapeHtml(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+  </script>
+</body>
+</html>

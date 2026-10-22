@@ -1,0 +1,69 @@
+name: Sync Google Slides Data & Deploy Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+  schedule:
+    - cron: "*/15 * * * *"
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  sync-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install python-pptx
+        run: pip install python-pptx
+
+      - name: Sync latest lesson plans from Google Slides
+        run: |
+          python - << 'EOF'
+          import urllib.request, io, json
+          from pptx import Presentation
+          url = "https://docs.google.com/presentation/d/1IR-BTZCYyhxH32vfEI7ogHkk7HoYfo5MBYHqpJoptFU/export/pptx"
+          data = urllib.request.urlopen(url, timeout=20).read()
+          prs = Presentation(io.BytesIO(data))
+          out = {}
+          for i in range(2, len(prs.slides)):
+              s = prs.slides[i]
+              tables = [[[c.text.strip() for c in r.cells] for r in sh.table.rows] for sh in s.shapes if sh.has_table]
+              out[str(i+1)] = tables
+          with open("slides_data.json", "w", encoding="utf-8") as f:
+              json.dump(out, f, ensure_ascii=False, indent=2)
+          with open("slides_data.js", "w", encoding="utf-8") as f:
+              f.write("window.PRELOADED_SLIDES = " + json.dumps(out, ensure_ascii=False) + ";")
+          EOF
+
+      - name: Commit updated slide data if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if [[ -n $(git status --porcelain slides_data.json slides_data.js) ]]; then
+            git add slides_data.json slides_data.js
+            git commit -m "chore: auto-sync latest lesson plans from Google Slides"
+            git push
+          fi
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
