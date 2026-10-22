@@ -30,16 +30,29 @@ jobs:
       - name: Sync latest lesson plans from Google Slides
         run: |
           python - << 'EOF'
-          import urllib.request, io, json
+          import urllib.request, io, json, os
           from pptx import Presentation
+          existing = {}
+          if os.path.exists("slides_data.json"):
+              with open("slides_data.json", "r", encoding="utf-8") as f:
+                  existing = json.load(f)
           url = "https://docs.google.com/presentation/d/1IR-BTZCYyhxH32vfEI7ogHkk7HoYfo5MBYHqpJoptFU/export/pptx"
           data = urllib.request.urlopen(url, timeout=20).read()
           prs = Presentation(io.BytesIO(data))
           out = {}
           for i in range(2, len(prs.slides)):
+              key = str(i+1)
               s = prs.slides[i]
               tables = [[[c.text.strip() for c in r.cells] for r in sh.table.rows] for sh in s.shapes if sh.has_table]
-              out[str(i+1)] = tables
+              # Check if fetched tables have actual content; if blank in Google Slides, keep existing pre-filled data
+              has_content = any(
+                  len(r) > 1 and r[1].strip() not in ("", "•", "• [활동 1]\n\n• [활동 2]")
+                  for t in tables for r in t[1:]
+              )
+              if not has_content and key in existing:
+                  out[key] = existing[key]
+              else:
+                  out[key] = tables
           with open("slides_data.json", "w", encoding="utf-8") as f:
               json.dump(out, f, ensure_ascii=False, indent=2)
           with open("slides_data.js", "w", encoding="utf-8") as f:
