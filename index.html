@@ -1684,7 +1684,13 @@
           cachedSlidesJson = allSlides;
         }
       } catch (e) {
-        // 로컬 file:// 환경에서는 window.PRELOADED_SLIDES 사용
+        try {
+          const remoteRes = await fetch(https://dingsong2022.github.io/2026-shinchon-openclass/slides_data.json?t=);
+          if (remoteRes.ok) {
+            allSlides = await remoteRes.json();
+            cachedSlidesJson = allSlides;
+          }
+        } catch (e2) {}
       }
 
       if (!allSlides || !allSlides[String(slideIndexNumber)]) {
