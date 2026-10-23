@@ -739,7 +739,7 @@
       <!-- Loading Indicator -->
       <div id="slideModalLoading" class="py-20 flex flex-col items-center justify-center gap-3 text-ink-700 text-xs font-medium">
         <div class="w-6 h-6 border-2 border-forest-800 border-t-transparent rounded-full animate-spin"></div>
-        <span>구글 슬라이드에서 최신 과정안을 불러오는 중입니다...</span>
+        <span>구글 슬라이드 원본을 불러오는 중입니다...</span>
       </div>
 
       <!-- 1. Native Editorial Lesson Plan View (Gowun Batang + Pretendard) -->
@@ -1795,27 +1795,34 @@
         jumpToWriteObservation(cls.id);
       };
 
-      loading.classList.remove('hidden');
+      // 기본: 구글 슬라이드 원본 미리보기를 바로 표시 (구글에서 실시간 렌더링되므로 수정 즉시 반영)
+      isRawSlideMode = true;
+      modeBtn.classList.remove('hidden');
+      modeBtn.textContent = '텍스트로 크게 보기';
       nativeContent.classList.add('hidden');
       rawView.classList.add('hidden');
-      img.src = `https://docs.google.com/presentation/d/${CONFIG.PRESENTATION_ID}/export/svg?pageid=${cls.slidePageId}&t=${Date.now()}`;
+      loading.classList.remove('hidden');
+      img.onload = () => {
+        loading.classList.add('hidden');
+        if (isRawSlideMode) rawView.classList.remove('hidden');
+      };
+      img.onerror = () => {
+        loading.classList.add('hidden');
+        if (isRawSlideMode) rawView.classList.remove('hidden');
+      };
+      img.src = `https://docs.google.com/presentation/d/${CONFIG.PRESENTATION_ID}/export/png?pageid=${cls.slidePageId}&t=${Date.now()}`;
 
       modal.classList.remove('hidden');
       modal.classList.add('flex');
       document.body.style.overflow = 'hidden';
 
+      // 보조: 텍스트로 크게 보기(모바일 가독성 뷰)는 백그라운드에서 준비
       try {
-        // 슬라이드 3쪽(index 0 -> slide 3)부터 12쪽(index 9 -> slide 12)까지 매칭
         const slideNumber = clsIndex + 3;
         const { overviewTable, stepsTable, pointsTable } = await getLiveSlideData(slideNumber);
         renderNativeLessonPlan(cls, overviewTable, stepsTable, pointsTable);
-        loading.classList.add('hidden');
-        nativeContent.classList.remove('hidden');
       } catch (err) {
-        console.warn('Live XML parse fallback to raw SVG:', err);
-        loading.classList.add('hidden');
-        rawView.classList.remove('hidden');
-        isRawSlideMode = true;
+        console.warn('Native view unavailable:', err);
         modeBtn.classList.add('hidden');
       }
     }
@@ -1960,7 +1967,7 @@
       if (isRawSlideMode) {
         nativeContent.classList.add('hidden');
         rawView.classList.remove('hidden');
-        modeBtn.textContent = '모바일 가독성 뷰로 보기';
+        modeBtn.textContent = '텍스트로 크게 보기';
       } else {
         rawView.classList.add('hidden');
         nativeContent.classList.remove('hidden');
