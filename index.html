@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
   <!-- Tailwind CSS & 과정안 슬라이드 데이터 -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="slides_data.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script><script src="slides_data.js"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -915,33 +915,122 @@
       syncSlideTitlesOnLoad();
     });
 
+    function applySlidesDataObject(allSlides) {
+      if (!allSlides) return;
+      cachedSlidesJson = allSlides;
+      if (allSlides._titles) {
+        let changed = false;
+        CONFIG.CLASSES.forEach((cls, idx) => {
+          const sNum = String(idx + 3);
+          const liveTitle = allSlides._titles[sNum];
+          if (liveTitle && liveTitle.trim() && liveTitle.trim() !== cls.title) {
+            cls.title = liveTitle.trim();
+            changed = true;
+          }
+        });
+        if (changed) {
+          renderClassCards();
+          initSelectOptions();
+        }
+      }
+    }
+
+    async function fetchLivePptxDirectly(fallbackSlides) {
+      if (typeof JSZip === 'undefined') return null;
+      try {
+        const pptxUrl = 'https://docs.google.com/presentation/d/' + CONFIG.PRESENTATION_ID + '/export/pptx';
+        const res = await fetch(pptxUrl, { credentials: 'omit' });
+        if (!res.ok) return null;
+        const buf = await res.arrayBuffer();
+        const zip = await JSZip.loadAsync(buf);
+        const parser = new DOMParser();
+        const out = { _titles: {} };
+
+        function extractCellXml(tc) {
+          const paras = Array.from(tc.getElementsByTagName('a:p'));
+          const lines = [];
+          paras.forEach(p => {
+            const runs = Array.from(p.getElementsByTagName('a:t'));
+            let txt = runs.map(r => r.textContent || '').join('').trim();
+            if (!txt) return;
+            const pPr = p.getElementsByTagName('a:pPr')[0];
+            let lvl = 0;
+            let buChar = null;
+            if (pPr) {
+              lvl = parseInt(pPr.getAttribute('lvl') || '0', 10) || 0;
+              const bu = pPr.getElementsByTagName('a:buChar')[0];
+              if (bu) buChar = bu.getAttribute('char');
+            }
+            if (buChar && !txt.startsWith(buChar) && !txt.startsWith('•') && !txt.startsWith('-')) {
+              const prefix = '  '.repeat(lvl) + (['•', '●', '▪'].includes(buChar) ? '• ' : buChar + ' ');
+              txt = prefix + txt;
+            } else if (lvl > 0 && !txt.startsWith(' ')) {
+              txt = '  '.repeat(lvl) + (txt.startsWith('-') ? '' : '- ') + txt;
+            }
+            lines.push(txt);
+          });
+          return lines.join('\n').trim();
+        }
+
+        for (let sIdx = 3; sIdx <= 12; sIdx++) {
+          const file = zip.file('ppt/slides/slide' + sIdx + '.xml');
+          if (!file) continue;
+          const xmlStr = await file.async('string');
+          const doc = parser.parseFromString(xmlStr, 'application/xml');
+          const key = String(sIdx);
+
+          // 1. 상단 배너 제목 추출
+          const spList = Array.from(doc.getElementsByTagName('p:sp'));
+          for (const sp of spList) {
+            const paras = Array.from(sp.getElementsByTagName('a:p')).map(p =>
+              Array.from(p.getElementsByTagName('a:t')).map(t => t.textContent || '').join('').trim()
+            ).filter(Boolean);
+            if (paras.length >= 2) {
+              out._titles[key] = paras[1];
+              break;
+            }
+          }
+
+          // 2. 표 추출
+          const tbls = Array.from(doc.getElementsByTagName('a:tbl'));
+          const tables = tbls.map(tbl => {
+            const trs = Array.from(tbl.getElementsByTagName('a:tr'));
+            return trs.map(tr => {
+              const tcs = Array.from(tr.getElementsByTagName('a:tc'));
+              return tcs.map(tc => extractCellXml(tc));
+            });
+          });
+
+          const hasContent = tables.some(t =>
+            t.slice(1).some(r => r.length > 1 && !['', '•', '• [활동 1]\n\n• [활동 2]', '• [활동 1]\n• [활동 2]'].includes((r[1] || '').trim()))
+          );
+          if (!hasContent && fallbackSlides && fallbackSlides[key]) {
+            out[key] = fallbackSlides[key];
+          } else {
+            out[key] = tables;
+          }
+        }
+        return out;
+      } catch (e) {
+        return null;
+      }
+    }
+
     async function syncSlideTitlesOnLoad() {
       try {
         let allSlides = window.PRELOADED_SLIDES || null;
+        applySlidesDataObject(allSlides);
         try {
           const res = await fetch('https://raw.githubusercontent.com/dingsong2022/2026-shinchon-openclass/main/slides_data.json?t=' + Date.now());
-          if (res.ok) allSlides = await res.json();
-        } catch (e) {
-          const rRes = await fetch('https://raw.githubusercontent.com/dingsong2022/2026-shinchon-openclass/main/slides_data.json?t=' + Date.now());
-          if (rRes.ok) allSlides = await rRes.json();
-        }
-        if (allSlides) {
-          cachedSlidesJson = allSlides;
-          if (allSlides._titles) {
-            let changed = false;
-            CONFIG.CLASSES.forEach((cls, idx) => {
-              const sNum = String(idx + 3);
-              const liveTitle = allSlides._titles[sNum];
-              if (liveTitle && liveTitle.trim() && liveTitle.trim() !== cls.title) {
-                cls.title = liveTitle.trim();
-                changed = true;
-              }
-            });
-            if (changed) {
-              renderClassCards();
-              initSelectOptions();
-            }
+          if (res.ok) {
+            allSlides = await res.json();
+            applySlidesDataObject(allSlides);
           }
+        } catch (e) {}
+        // 실시간 구글 슬라이드 직접 파싱 (대기시간 0초!)
+        const liveSlides = await fetchLivePptxDirectly(allSlides);
+        if (liveSlides) {
+          applySlidesDataObject(liveSlides);
         }
       } catch (e) {}
     }
@@ -1709,20 +1798,19 @@
     // slides_data.json 또는 내장 데이터에서 슬라이드 표 데이터를 즉시 로드 (선생님들이 슬라이드 폰트를 무엇으로 바꾸든 고운바탕+프리텐다드로 통일 렌더링)
     async function getLiveSlideData(slideIndexNumber) {
       let allSlides = cachedSlidesJson || (window.PRELOADED_SLIDES || null);
-      try {
-        const res = await fetch('https://raw.githubusercontent.com/dingsong2022/2026-shinchon-openclass/main/slides_data.json?t=' + Date.now());
-        if (res.ok) {
-          allSlides = await res.json();
-          cachedSlidesJson = allSlides;
-        }
-      } catch (e) {
+      if (!cachedSlidesJson) {
         try {
-          const remoteRes = await fetch('https://raw.githubusercontent.com/dingsong2022/2026-shinchon-openclass/main/slides_data.json?t=' + Date.now());
-          if (remoteRes.ok) {
-            allSlides = await remoteRes.json();
+          const res = await fetch('https://raw.githubusercontent.com/dingsong2022/2026-shinchon-openclass/main/slides_data.json?t=' + Date.now());
+          if (res.ok) {
+            allSlides = await res.json();
             cachedSlidesJson = allSlides;
           }
-        } catch (e2) {}
+        } catch (e) {}
+      }
+      const liveDirect = await fetchLivePptxDirectly(allSlides);
+      if (liveDirect) {
+        allSlides = liveDirect;
+        applySlidesDataObject(liveDirect);
       }
 
       if (!allSlides || !allSlides[String(slideIndexNumber)]) {
