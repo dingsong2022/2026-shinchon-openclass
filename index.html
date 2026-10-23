@@ -105,7 +105,7 @@
           time: "13:30~14:15",
           subject: "국어",
           teacher: "김명진",
-          title: "AI서논술형 평가를 활용하여 생각의 힘 기르기",
+          title: "AI서논술형 평가를 활용하여 생각하는 힘 기르기",
           targetClass: "1-1",
           room: "1-1 교실",
           floor: "5층",
@@ -919,10 +919,10 @@
       try {
         let allSlides = window.PRELOADED_SLIDES || null;
         try {
-          const res = await fetch('./slides_data.json?t=' + Date.now());
+          const res = await fetch('https://raw.githubusercontent.com/dingsong2022/2026-shinchon-openclass/main/slides_data.json?t=' + Date.now());
           if (res.ok) allSlides = await res.json();
         } catch (e) {
-          const rRes = await fetch('https://dingsong2022.github.io/2026-shinchon-openclass/slides_data.json?t=' + Date.now());
+          const rRes = await fetch('https://raw.githubusercontent.com/dingsong2022/2026-shinchon-openclass/main/slides_data.json?t=' + Date.now());
           if (rRes.ok) allSlides = await rRes.json();
         }
         if (allSlides) {
@@ -1710,14 +1710,14 @@
     async function getLiveSlideData(slideIndexNumber) {
       let allSlides = cachedSlidesJson || (window.PRELOADED_SLIDES || null);
       try {
-        const res = await fetch(`./slides_data.json?t=${Date.now()}`);
+        const res = await fetch('https://raw.githubusercontent.com/dingsong2022/2026-shinchon-openclass/main/slides_data.json?t=' + Date.now());
         if (res.ok) {
           allSlides = await res.json();
           cachedSlidesJson = allSlides;
         }
       } catch (e) {
         try {
-          const remoteRes = await fetch('https://dingsong2022.github.io/2026-shinchon-openclass/slides_data.json?t=' + Date.now());
+          const remoteRes = await fetch('https://raw.githubusercontent.com/dingsong2022/2026-shinchon-openclass/main/slides_data.json?t=' + Date.now());
           if (remoteRes.ok) {
             allSlides = await remoteRes.json();
             cachedSlidesJson = allSlides;

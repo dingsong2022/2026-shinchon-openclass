@@ -12,8 +12,15 @@ permissions:
   pages: write
   id-token: write
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
   sync-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -32,6 +39,29 @@ jobs:
           python - << 'EOF'
           import urllib.request, io, json, os
           from pptx import Presentation
+
+          def extract_cell_text(cell):
+              lines = []
+              for p in cell.text_frame.paragraphs:
+                  txt = p.text.strip()
+                  if not txt:
+                      continue
+                  # Check XML for automatic bullet char (a:buChar) or level indentation
+                  pPr = p._p.find('{http://schemas.openxmlformats.org/drawingml/2006/main}pPr')
+                  bu_char = None
+                  lvl = p.level or 0
+                  if pPr is not None:
+                      bu = pPr.find('{http://schemas.openxmlformats.org/drawingml/2006/main}buChar')
+                      if bu is not None:
+                          bu_char = bu.get('char')
+                  if bu_char and not txt.startswith(bu_char) and not txt.startswith('•') and not txt.startswith('-'):
+                      prefix = ('  ' * lvl) + ('• ' if bu_char in ('•', '●', '▪') else f'{bu_char} ')
+                      txt = prefix + txt
+                  elif lvl > 0 and not txt.startswith(' '):
+                      txt = ('  ' * lvl) + ('- ' if not txt.startswith('-') else '') + txt
+                  lines.append(txt)
+              return "\n".join(lines).strip()
+
           existing = {}
           if os.path.exists("slides_data.json"):
               with open("slides_data.json", "r", encoding="utf-8") as f:
@@ -49,10 +79,9 @@ jobs:
                       if len(lines) >= 2:
                           out["_titles"][key] = lines[1]
                           break
-              tables = [[[c.text.strip() for c in r.cells] for r in sh.table.rows] for sh in s.shapes if sh.has_table]
-              # Check if fetched tables have actual content; if blank in Google Slides, keep existing pre-filled data
+              tables = [[[extract_cell_text(c) for c in r.cells] for r in sh.table.rows] for sh in s.shapes if sh.has_table]
               has_content = any(
-                  len(r) > 1 and r[1].strip() not in ("", "•", "• [활동 1]\n\n• [활동 2]")
+                  len(r) > 1 and r[1].strip() not in ("", "•", "• [활동 1]\n\n• [활동 2]", "• [활동 1]\n• [활동 2]")
                   for t in tables for r in t[1:]
               )
               if not has_content and key in existing:
@@ -72,6 +101,7 @@ jobs:
           if [[ -n $(git status --porcelain slides_data.json slides_data.js) ]]; then
             git add slides_data.json slides_data.js
             git commit -m "chore: auto-sync latest lesson plans from Google Slides"
+            git pull --rebase origin main
             git push
           fi
 
