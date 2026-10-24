@@ -1798,11 +1798,11 @@
 
       // 구글 슬라이드 원본이 아직 빈 양식인 쪽은 텍스트 뷰를, 작성된 쪽은 원본 미리보기를 기본으로 표시
       const slideNumber = clsIndex + 3;
-      const dataSrc = cachedSlidesJson || window.PRELOADED_SLIDES || {};
-      const emptyInSlides = !cls.customImage && (dataSrc._live_empty || []).includes(String(slideNumber));
-      isRawSlideMode = !emptyInSlides;
+      // 기본 모드: 가독성이 뛰어나고 즉시 뜨는 '텍스트 상세 뷰'를 우선 표시!
+      // '원본 슬라이드 보기' 버튼을 누르면 고화질 원본 슬라이드가 표시됩니다.
+      isRawSlideMode = false;
       modeBtn.classList.remove('hidden');
-      modeBtn.textContent = isRawSlideMode ? '텍스트로 크게 보기' : '원본 슬라이드 보기';
+      modeBtn.textContent = '원본 슬라이드 보기';
       nativeContent.classList.add('hidden');
       rawView.classList.add('hidden');
       loading.classList.remove('hidden');
