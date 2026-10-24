@@ -1795,20 +1795,21 @@
         jumpToWriteObservation(cls.id);
       };
 
-      // 기본: 구글 슬라이드 원본 미리보기를 바로 표시 (구글에서 실시간 렌더링되므로 수정 즉시 반영)
-      isRawSlideMode = true;
+      // 구글 슬라이드 원본이 아직 빈 양식인 쪽은 텍스트 뷰를, 작성된 쪽은 원본 미리보기를 기본으로 표시
+      const slideNumber = clsIndex + 3;
+      const dataSrc = cachedSlidesJson || window.PRELOADED_SLIDES || {};
+      const emptyInSlides = (dataSrc._live_empty || []).includes(String(slideNumber));
+      isRawSlideMode = !emptyInSlides;
       modeBtn.classList.remove('hidden');
-      modeBtn.textContent = '텍스트로 크게 보기';
+      modeBtn.textContent = isRawSlideMode ? '텍스트로 크게 보기' : '원본 슬라이드 보기';
       nativeContent.classList.add('hidden');
       rawView.classList.add('hidden');
       loading.classList.remove('hidden');
-      img.onload = () => {
-        loading.classList.add('hidden');
-        if (isRawSlideMode) rawView.classList.remove('hidden');
-      };
-      img.onerror = () => {
-        loading.classList.add('hidden');
-        if (isRawSlideMode) rawView.classList.remove('hidden');
+      img.onload = img.onerror = () => {
+        if (isRawSlideMode) {
+          loading.classList.add('hidden');
+          rawView.classList.remove('hidden');
+        }
       };
       img.src = `https://docs.google.com/presentation/d/${CONFIG.PRESENTATION_ID}/export/png?pageid=${cls.slidePageId}&t=${Date.now()}`;
 
@@ -1816,15 +1817,25 @@
       modal.classList.add('flex');
       document.body.style.overflow = 'hidden';
 
-      // 보조: 텍스트로 크게 보기(모바일 가독성 뷰)는 백그라운드에서 준비
       try {
-        const slideNumber = clsIndex + 3;
         const { overviewTable, stepsTable, pointsTable } = await getLiveSlideData(slideNumber);
         renderNativeLessonPlan(cls, overviewTable, stepsTable, pointsTable);
+        if (!isRawSlideMode && currentModalClass === cls) {
+          loading.classList.add('hidden');
+          nativeContent.classList.remove('hidden');
+        }
       } catch (err) {
         console.warn('Native view unavailable:', err);
         modeBtn.classList.add('hidden');
+        if (!isRawSlideMode) {
+          isRawSlideMode = true;
+          if (img.complete) {
+            loading.classList.add('hidden');
+            rawView.classList.remove('hidden');
+          }
+        }
       }
+    }
     }
 
     function renderNativeLessonPlan(cls, overviewTable, stepsTable, pointsTable) {

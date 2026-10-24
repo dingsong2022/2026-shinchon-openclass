@@ -69,7 +69,7 @@ jobs:
           url = "https://docs.google.com/presentation/d/1IR-BTZCYyhxH32vfEI7ogHkk7HoYfo5MBYHqpJoptFU/export/pptx"
           data = urllib.request.urlopen(url, timeout=20).read()
           prs = Presentation(io.BytesIO(data))
-          out = {"_titles": {}}
+          out = {"_titles": {}, "_live_empty": []}
           for i in range(2, len(prs.slides)):
               key = str(i+1)
               s = prs.slides[i]
@@ -84,6 +84,8 @@ jobs:
                   len(r) > 1 and r[1].strip() not in ("", "•", "• [활동 1]\n\n• [활동 2]", "• [활동 1]\n• [활동 2]")
                   for t in tables for r in t[1:]
               )
+              if not has_content:
+                  out["_live_empty"].append(key)
               if not has_content and key in existing:
                   out[key] = existing[key]
               else:
