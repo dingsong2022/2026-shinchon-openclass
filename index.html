@@ -885,6 +885,12 @@
       return vid;
     }
 
+    // 삭제 버튼은 본인이 작성한 항목에만 표시 (관리자: 주소 끝에 ?admin=1)
+    const IS_ADMIN = new URLSearchParams(location.search).has('admin');
+    function canDelete(item) {
+      return IS_ADMIN || (!!item && !!item.vid && item.vid === getViewerId());
+    }
+
     const INITIAL_OBSERVATIONS = [
       {
         id: "welcome-guide-1",
@@ -913,6 +919,14 @@
       loadCheckins();
       loadObservations();
       syncSlideTitlesOnLoad();
+
+      // 30초마다 참관 등록부·참관록 자동 새로고침 (화면이 보이는 동안만)
+      setInterval(() => {
+        if (document.visibilityState === 'visible') {
+          loadCheckins();
+          loadObservations();
+        }
+      }, 30000);
     });
 
     async function syncSlideTitlesOnLoad() {
@@ -1184,7 +1198,8 @@
               school: (f.school && f.school.stringValue) || '',
               name: (f.name && f.name.stringValue) || '',
               subject: (f.subject && f.subject.stringValue) || '',
-              timeStr: (f.timeStr && f.timeStr.stringValue) || ''
+              timeStr: (f.timeStr && f.timeStr.stringValue) || '',
+              vid: (f.vid && f.vid.stringValue) || ''
             };
           }).sort((a, b) => a.ts - b.ts);
           localStorage.setItem(CHECKIN_STORAGE_KEY, JSON.stringify(checkins));
@@ -1256,13 +1271,14 @@
             school,
             name,
             subject,
-            timeStr
+            timeStr,
+            vid: getViewerId()
           });
         } else {
-          checkins.push({ id: 'local-' + ts, ts, school, name, subject, timeStr });
+          checkins.push({ id: 'local-' + ts, ts, school, name, subject, timeStr, vid: getViewerId() });
         }
       } catch (err) {
-        checkins.push({ id: 'local-' + ts, ts, school, name, subject, timeStr });
+        checkins.push({ id: 'local-' + ts, ts, school, name, subject, timeStr, vid: getViewerId() });
       }
 
       localStorage.setItem(CHECKIN_STORAGE_KEY, JSON.stringify(checkins));
@@ -1314,7 +1330,7 @@
           <td class="py-2.5 px-3 text-ink-700">${escapeHtml(item.subject)}</td>
           <td class="py-2.5 px-3 text-right text-ink-400 text-[11px]">${escapeHtml(item.timeStr)}</td>
           <td class="py-2.5 px-2 text-center">
-            <button type="button" onclick="deleteCheckin('${item.id}', '${item.docName || ''}')" class="text-ink-400 hover:text-terracotta-700 px-1" title="삭제">✕</button>
+            ${canDelete(item) ? `<button type="button" onclick="deleteCheckin('${item.id}', '${item.docName || ''}')" class="text-ink-400 hover:text-terracotta-700 px-1" title="삭제">✕</button>` : ''}
           </td>
         </tr>
       `).join('');
@@ -1395,7 +1411,8 @@
               content: (f.content && f.content.stringValue) || '',
               question: (f.question && f.question.stringValue) || '',
               createdAt: meta.createdAt || '',
-              likes: meta.likes || 0
+              likes: meta.likes || 0,
+              vid: (f.vid && f.vid.stringValue) || ''
             };
           }).sort((a, b) => b.ts - a.ts);
 
@@ -1462,7 +1479,8 @@
         content,
         question,
         createdAt,
-        likes: 0
+        likes: 0,
+        vid: getViewerId()
       };
 
       try {
@@ -1589,7 +1607,7 @@
                   <span>♥</span>
                   <span>공감 ${item.likes || 0}</span>
                 </button>
-                ${item.id !== 'welcome-guide-1' ? `
+                ${item.id !== 'welcome-guide-1' && canDelete(item) ? `
                   <button type="button" onclick="deleteObservation('${item.id}')" class="text-ink-400 hover:text-ink-700 text-xs px-1" title="삭제">
                     ✕
                   </button>
