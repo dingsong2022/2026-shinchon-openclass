@@ -347,7 +347,7 @@
           <span class="text-[10px] font-bold tracking-[0.15em] uppercase text-terracotta-600 block mb-0.5">VISITOR CHECK-IN</span>
           <h2 class="font-serif text-lg font-bold text-ink-900">참관 등록부 (방명록)</h2>
         </div>
-        <div class="flex items-center gap-1.5">
+        <div id="checkinAdminTools" class="hidden items-center gap-1.5">
           <button type="button" onclick="openCheckinListModal()" class="text-[11px] font-semibold text-ink-700 bg-white border border-paper-300 px-2.5 py-1 rounded-lg hover:bg-paper-100 transition flex items-center gap-1">
             <span>명단 확인</span>
             <span id="checkinCountBadge" class="px-1.5 py-0.2 rounded-full bg-forest-50 text-forest-800 font-bold text-[10px]">0명</span>
@@ -912,6 +912,11 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       initSelectOptions();
+      // 방명록 명단 확인·CSV 저장은 관리자(?admin=1)에게만 표시
+      if (IS_ADMIN) {
+        const adminTools = document.getElementById('checkinAdminTools');
+        if (adminTools) { adminTools.classList.remove('hidden'); adminTools.classList.add('flex'); }
+      }
       renderClassCards();
       renderBoardFilterChips();
       loadLikedIds();
@@ -1337,6 +1342,7 @@
     }
 
     function openCheckinListModal() {
+      if (!IS_ADMIN) return;
       loadCheckins();
       const modal = document.getElementById('checkinListModal');
       modal.classList.remove('hidden');
@@ -1352,6 +1358,7 @@
     }
 
     function exportCheckinCSV() {
+      if (!IS_ADMIN) return;
       if (!checkins || checkins.length === 0) {
         showToast('저장할 참관 등록 명단이 없습니다.');
         return;
